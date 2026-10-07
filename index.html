@@ -16,10 +16,27 @@
   - Photos: Unsplash (free licence). Swap in your own venue photos
   ============================================================
 -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Martian+Mono:wght@400;500&family=Schibsted+Grotesk:wght@400;500;600;700&display=swap">
+<link rel="preconnect" href="https://images.unsplash.com">
+<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+<link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+<link rel="preload" as="image" media="(max-width:700px)" imagesrcset="https://images.unsplash.com/photo-1544698310-74ea9d1c8258?auto=format&fit=crop&w=640&h=1140&q=60 640w, https://images.unsplash.com/photo-1544698310-74ea9d1c8258?auto=format&fit=crop&w=960&h=1700&q=60 960w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" media="(min-width:701px)" imagesrcset="https://images.unsplash.com/photo-1544698310-74ea9d1c8258?auto=format&fit=crop&w=1280&q=68 1280w, https://images.unsplash.com/photo-1544698310-74ea9d1c8258?auto=format&fit=crop&w=1600&q=68 1600w, https://images.unsplash.com/photo-1544698310-74ea9d1c8258?auto=format&fit=crop&w=1920&q=68 1920w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/bigshouldersdisplay/v24/fC1_PZJEZG-e9gHhdI4-NBbfd2ys3SjJCx1czNDu.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/schibstedgrotesk/v7/Jqz55SSPQuCQF3t8uOwiUL-taUTtap9Gayo.woff2" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="https://fonts.gstatic.com/s/martianmono/v6/2V0PKIcADoYhV6w87xrTKjs4CYElh_VS9YA4TlTnaTq9wQ.woff2" crossorigin>
+<!-- animation libraries: downloaded in parallel, run after the page is parsed, never block the first paint -->
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <style>
+/* Fonts declared here (no render-blocking Google CSS request). latin + latin-ext subsets. */
+@font-face{font-family:'Big Shoulders Display';font-style:normal;font-weight:600 900;font-display:swap;src:url(https://fonts.gstatic.com/s/bigshouldersdisplay/v24/fC1_PZJEZG-e9gHhdI4-NBbfd2ys3SjJCx1cwtDuHpM.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Big Shoulders Display';font-style:normal;font-weight:600 900;font-display:swap;src:url(https://fonts.gstatic.com/s/bigshouldersdisplay/v24/fC1_PZJEZG-e9gHhdI4-NBbfd2ys3SjJCx1czNDu.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Martian Mono';font-style:normal;font-weight:400 500;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/martianmono/v6/2V0PKIcADoYhV6w87xrTKjs4CYElh_VS9YA4TlTnaTS9wWmm.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Martian Mono';font-style:normal;font-weight:400 500;font-stretch:100%;font-display:swap;src:url(https://fonts.gstatic.com/s/martianmono/v6/2V0PKIcADoYhV6w87xrTKjs4CYElh_VS9YA4TlTnaTq9wQ.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+@font-face{font-family:'Schibsted Grotesk';font-style:normal;font-weight:400 700;font-display:swap;src:url(https://fonts.gstatic.com/s/schibstedgrotesk/v7/Jqz55SSPQuCQF3t8uOwiUL-taUTtap9Iayoxdg.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF}
+@font-face{font-family:'Schibsted Grotesk';font-style:normal;font-weight:400 700;font-display:swap;src:url(https://fonts.gstatic.com/s/schibstedgrotesk/v7/Jqz55SSPQuCQF3t8uOwiUL-taUTtap9Gayo.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 /* Layout: a floodlit pitch at night. Charcoal ground, chalk-line grid, electric lime light cutting through. */
 :root{
   --ink:#070908;        /* page ground, green-biased black */
@@ -79,7 +96,7 @@ section{position:relative}
 .sec{padding-block:clamp(84px,11vw,160px)}
 
 /* film grain over everything, very low */
-.grain{position:fixed;inset:0;pointer-events:none;z-index:300;opacity:.05;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.grain{display:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
 
 /* ---------- type ---------- */
 .eyebrow{display:inline-flex;align-items:center;gap:12px;font-family:var(--f-mono);font-size:11px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:var(--lime);margin:0}
@@ -87,14 +104,14 @@ section{position:relative}
 .h2{font-family:var(--f-display);font-weight:900;font-size:clamp(48px,7.4vw,114px);line-height:.86;letter-spacing:-.005em;text-transform:uppercase;margin:18px 0 0;text-wrap:balance}
 .h2 .hl{color:var(--lime);text-shadow:0 0 42px rgba(200,255,46,.28)}
 .h2 .ol{color:transparent;-webkit-text-stroke:1.5px var(--chalk)}
-.h2 .w{display:inline-block;will-change:transform}
+.h2 .w{display:inline-block}
 .lead{color:var(--mist);font-size:clamp(16px,1.25vw,18px);line-height:1.65;max-width:46ch;margin:0}
 .mono{font-family:var(--f-mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase}
 .sec-head{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:28px 64px;align-items:end;margin-bottom:clamp(40px,5vw,72px)}
 .sec-head .side{display:grid;gap:22px;justify-items:start}
 
 /* ---------- buttons ---------- */
-.btn{--h:54px;position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;height:var(--h);padding:0 26px;border-radius:999px;border:1px solid transparent;font-family:var(--f-display);font-weight:800;font-size:17px;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;cursor:pointer;white-space:nowrap;overflow:hidden;isolation:isolate;transition:transform .45s var(--ease),box-shadow .45s var(--ease),background-color .35s,border-color .35s,color .35s;will-change:transform}
+.btn{--h:54px;position:relative;display:inline-flex;align-items:center;justify-content:center;gap:12px;height:var(--h);padding:0 26px;border-radius:999px;border:1px solid transparent;font-family:var(--f-display);font-weight:800;font-size:17px;letter-spacing:.07em;text-transform:uppercase;text-decoration:none;cursor:pointer;white-space:nowrap;overflow:hidden;isolation:isolate;transition:transform .45s var(--ease),box-shadow .45s var(--ease),background-color .35s,border-color .35s,color .35s}
 .btn::after{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(110deg,transparent 30%,rgba(255,255,255,.55) 50%,transparent 70%);transform:translateX(-130%);transition:transform .9s var(--ease)}
 .btn:hover::after{transform:translateX(130%)}
 .btn > *{position:relative;z-index:2}
@@ -104,7 +121,7 @@ section{position:relative}
 .btn-lime{background:var(--lime);color:var(--on-lime);box-shadow:0 12px 34px -12px var(--lime-glow)}
 .btn-lime .arr{background:var(--on-lime);color:var(--lime)}
 .btn-lime:hover{box-shadow:0 0 0 6px rgba(200,255,46,.14),0 18px 50px -10px rgba(200,255,46,.75)}
-.btn-ghost{background:rgba(255,255,255,.05);color:var(--chalk);border-color:var(--line-2);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+.btn-ghost{background:rgba(255,255,255,.06);color:var(--chalk);border-color:var(--line-2)}
 .btn-ghost .arr{background:rgba(255,255,255,.08)}
 .btn-ghost:hover{border-color:rgba(200,255,46,.6);color:var(--lime);box-shadow:0 0 30px -8px rgba(200,255,46,.4)}
 .btn-sm{--h:44px;font-size:15px;padding:0 18px;gap:8px}
@@ -119,12 +136,12 @@ section{position:relative}
 .chip:hover{color:var(--chalk);border-color:rgba(200,255,46,.5)}
 .chip[aria-pressed="true"]{background:var(--lime);border-color:var(--lime);color:var(--on-lime)}
 .chip:disabled{opacity:.3;cursor:not-allowed}
-.badge{display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:999px;background:rgba(7,9,8,.62);border:1px solid rgba(255,255,255,.12);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--chalk);white-space:nowrap}
+.badge{display:inline-flex;align-items:center;gap:7px;height:28px;padding:0 11px;border-radius:999px;background:rgba(7,9,8,.8);border:1px solid rgba(255,255,255,.12);font-family:var(--f-mono);font-size:10px;letter-spacing:.06em;text-transform:uppercase;color:var(--chalk);white-space:nowrap}
 .badge .d{width:6px;height:6px;border-radius:50%;background:var(--lime);box-shadow:0 0 8px var(--lime)}
 .badge.warn .d{background:var(--warn);box-shadow:0 0 8px var(--warn)}
 .badge.hot .d{background:var(--hot);box-shadow:0 0 8px var(--hot)}
 .badge .icon{width:12px;height:12px}
-.glass{background:linear-gradient(180deg,rgba(255,255,255,.085),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.11);backdrop-filter:blur(22px) saturate(140%);-webkit-backdrop-filter:blur(22px) saturate(140%);box-shadow:0 40px 90px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.08)}
+.glass{background:linear-gradient(180deg,rgba(255,255,255,.085),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.11);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);box-shadow:0 40px 90px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.08)}
 
 /* ---------- progress + cursor + toast ---------- */
 .progress{position:fixed;top:0;left:0;right:0;height:2px;z-index:70;transform-origin:0 50%;transform:scaleX(0);background:var(--lime);box-shadow:0 0 12px var(--lime)}
@@ -139,7 +156,7 @@ section{position:relative}
 
 /* ---------- nav ---------- */
 .nav{position:fixed;left:0;right:0;top:0;z-index:60;padding-top:env(safe-area-inset-top,0px);transition:background-color .45s,border-color .45s,backdrop-filter .45s;border-bottom:1px solid transparent}
-.nav.scrolled{background:rgba(7,9,8,.68);border-bottom-color:var(--line);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%)}
+.nav.scrolled{background:rgba(7,9,8,.8);border-bottom-color:var(--line);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 .nav-in{max-width:var(--max);margin-inline:auto;padding:18px var(--gutter);display:flex;align-items:center;gap:20px;transition:padding .45s var(--ease)}
 .nav.scrolled .nav-in{padding-block:11px}
 .logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--f-display);font-weight:900;font-size:27px;letter-spacing:.05em;line-height:1;color:var(--chalk)}
@@ -169,21 +186,43 @@ section{position:relative}
 /* ---------- hero ---------- */
 .hero{position:relative;min-height:100svh;display:flex;flex-direction:column;overflow:hidden;isolation:isolate;background:var(--ink)}
 .hero-media{position:absolute;inset:-4% 0 -4% 0;z-index:-4;overflow:hidden}
-.hero-media img{width:100%;height:100%;object-fit:cover;object-position:60% 45%;transform:scale(1.08);filter:saturate(1.15) contrast(1.06)}
+.hero-media img,.hero-media picture{display:block;width:100%;height:100%}
+.hero-media img{object-fit:cover;object-position:60% 45%;transform:scale(1.08)}
 .hero-shade{position:absolute;inset:0;z-index:-3;background:linear-gradient(90deg,rgba(7,9,8,.94) 0%,rgba(7,9,8,.7) 38%,rgba(7,9,8,.18) 75%,rgba(7,9,8,.35) 100%),linear-gradient(0deg,var(--ink) 0%,rgba(7,9,8,0) 34%),linear-gradient(180deg,rgba(7,9,8,.7) 0%,rgba(7,9,8,0) 22%)}
-.beams{position:absolute;inset:0;z-index:-2;pointer-events:none;mix-blend-mode:screen}
-.beam{position:absolute;top:-6%;width:52vw;height:125%;transform-origin:50% 0;clip-path:polygon(47% 0,53% 0,100% 100%,0 100%);background:linear-gradient(180deg,rgba(255,247,218,.42),rgba(255,247,218,.08) 55%,rgba(255,247,218,0) 85%);filter:blur(16px);opacity:.75}
-.beam.b1{left:-14vw;transform:rotate(-26deg);animation:sway1 11s ease-in-out infinite}
-.beam.b2{right:-18vw;transform:rotate(30deg);animation:sway2 13s ease-in-out infinite;opacity:.55}
-.beam.b3{left:30vw;transform:rotate(6deg);width:30vw;opacity:.22;animation:sway1 15s ease-in-out infinite reverse}
+.beams{position:absolute;inset:0;z-index:-2;pointer-events:none;overflow:hidden}
+.beam{--sp:18deg;--o:.75;position:absolute;top:-6%;width:56vw;height:125%;transform-origin:50% 0;background:conic-gradient(from calc(180deg - var(--sp)) at 50% 0%,rgba(255,247,218,0) 0deg,rgba(255,247,218,.3) calc(var(--sp) * .6),rgba(255,247,218,.46) var(--sp),rgba(255,247,218,.3) calc(var(--sp) * 1.4),rgba(255,247,218,0) calc(var(--sp) * 2));-webkit-mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.45) 50%,transparent 86%);mask-image:linear-gradient(180deg,#000 0%,rgba(0,0,0,.45) 50%,transparent 86%);opacity:var(--o);will-change:transform}
+.beam.b1{left:-16vw;transform:rotate(-26deg);animation:sway1 11s ease-in-out infinite}
+.beam.b2{--o:.55;right:-20vw;transform:rotate(30deg);animation:sway2 13s ease-in-out infinite}
+.beam.b3{--o:.22;--sp:10deg;left:28vw;transform:rotate(6deg);width:34vw;animation:sway1 15s ease-in-out infinite reverse}
 @keyframes sway1{0%,100%{rotate:0deg}50%{rotate:4deg}}
 @keyframes sway2{0%,100%{rotate:0deg}50%{rotate:-4deg}}
-.streak{position:absolute;z-index:-1;height:2px;width:34vw;left:-40vw;border-radius:2px;background:linear-gradient(90deg,transparent,rgba(200,255,46,.9),#fff,transparent);filter:drop-shadow(0 0 8px var(--lime));pointer-events:none;opacity:0}
+.streak{position:absolute;z-index:-1;height:2px;width:34vw;left:-40vw;border-radius:2px;background:linear-gradient(90deg,transparent,rgba(200,255,46,.9),#fff,transparent);box-shadow:0 0 12px rgba(200,255,46,.55);pointer-events:none;opacity:0}
 .streak.s1{top:34%;transform:rotate(-14deg);animation:streak 7s 2.6s infinite}
 .streak.s2{top:68%;transform:rotate(-14deg);animation:streak 9s 5.4s infinite;width:22vw}
 @keyframes streak{0%{translate:0 0;opacity:0}6%{opacity:1}24%{translate:180vw -30vw;opacity:0}100%{translate:180vw -30vw;opacity:0}}
-.hero.intro .hero-media,.hero.intro .hero-title .line>span,.hero.intro [data-hero],.hero.intro #qbook{visibility:hidden;animation:unhide 0s 2.5s forwards}
-@keyframes unhide{to{visibility:visible}}
+/* hero intro: pure CSS, plays on first paint */
+.hero-media{animation:flood 1.1s .05s linear backwards}
+.hero-media img{animation:heroZoom 2.2s var(--expo) backwards}
+.hero-title .line>span{animation:lineUp 1.05s var(--expo) backwards}
+.hero-title .line:nth-child(1)>span{animation-delay:.12s}
+.hero-title .line:nth-child(2)>span{animation-delay:.21s}
+.hero-title .line:nth-child(3)>span{animation-delay:.3s}
+[data-hero]{animation:fadeUp .85s var(--expo) backwards}
+.hero-kicker{animation-delay:.05s}
+.hero-sub{animation-delay:.42s}
+.hero-text{animation-delay:.5s}
+.hero-ctas{animation-delay:.58s}
+.live{animation-delay:.66s}
+#qbook{animation:cardIn 1.1s .45s var(--expo) backwards}
+.hero .beam.b1{animation:beamOn 1.2s .2s linear backwards,sway1 11s 1.4s ease-in-out infinite}
+.hero .beam.b2{animation:beamOn 1.2s .42s linear backwards,sway2 13s 1.6s ease-in-out infinite}
+.hero .beam.b3{animation:beamOn 1.2s .7s linear backwards,sway1 15s 1.9s ease-in-out infinite reverse}
+@keyframes flood{0%{opacity:.3}10%{opacity:.8}18%{opacity:.35}30%{opacity:.95}42%{opacity:.65}100%{opacity:1}}
+@keyframes heroZoom{from{transform:scale(1.22)}}
+@keyframes lineUp{from{transform:translateY(112%) rotate(4deg)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}}
+@keyframes cardIn{from{opacity:0;transform:perspective(1000px) translateY(56px) rotateX(10deg)}}
+@keyframes beamOn{0%{opacity:0}8%{opacity:1}16%{opacity:.08}26%{opacity:.95}36%{opacity:.3}100%{opacity:var(--o)}}
 #hero-fx{position:absolute;inset:0;z-index:-1;width:100%;height:100%;pointer-events:none}
 .hero-in{position:relative;flex:1;width:100%;max-width:var(--max);margin-inline:auto;padding:calc(var(--nav-h) + 56px + env(safe-area-inset-top,0px)) var(--gutter) clamp(64px,8vh,96px);display:grid;grid-template-columns:minmax(0,1.3fr) minmax(320px,.7fr);gap:40px 56px;align-items:end}
 .hero-kicker{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
@@ -299,7 +338,7 @@ section{position:relative}
 .sport:hover img{transform:scale(1.1);filter:saturate(1.15)}
 .sport:hover::after{opacity:1}
 .sport-top{position:absolute;top:18px;left:18px;right:18px;display:flex;justify-content:space-between;align-items:center}
-.sport-ic{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:rgba(7,9,8,.55);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);color:var(--lime);transition:transform .6s var(--expo),background-color .4s,color .4s}
+.sport-ic{display:grid;place-items:center;width:46px;height:46px;border-radius:50%;background:rgba(7,9,8,.72);border:1px solid rgba(255,255,255,.14);color:var(--lime);transition:transform .6s var(--expo),background-color .4s,color .4s}
 .sport:hover .sport-ic{transform:rotate(-20deg) scale(1.08);background:var(--lime);color:var(--on-lime)}
 .sport-c{position:absolute;left:0;right:0;bottom:0;padding:24px;transform:translateY(44px);transition:transform .7s var(--expo)}
 .sport:hover .sport-c,.sport:focus-visible .sport-c{transform:none}
@@ -339,6 +378,7 @@ section{position:relative}
 .pin.active .halo{fill:rgba(200,255,46,.32);animation-duration:1.4s}
 @keyframes halo{0%{transform:scale(.4);opacity:1}100%{transform:scale(2.2);opacity:0}}
 .map-hud{position:absolute;left:16px;right:16px;top:16px;display:flex;justify-content:space-between;align-items:center;pointer-events:none}
+.map-info.glass{backdrop-filter:none;-webkit-backdrop-filter:none;background:rgba(18,26,21,.96)}
 .map-info{position:relative;margin:0 14px 14px;display:grid;grid-template-columns:64px minmax(0,1fr) auto;align-items:center;gap:14px;padding:12px;border-radius:18px;transition:transform .5s var(--expo),opacity .4s}
 .map-info img{width:64px;height:64px;border-radius:12px;object-fit:cover}
 .map-info h4{margin:0;font-family:var(--f-display);font-weight:800;font-size:21px;line-height:1;text-transform:uppercase}
@@ -410,11 +450,10 @@ section{position:relative}
 .slot small{font-size:9px;font-weight:400;color:var(--mist);letter-spacing:.04em}
 .slot:hover:not(:disabled){transform:translateY(-3px);border-color:rgba(200,255,46,.6);background:var(--lime-tint);box-shadow:0 10px 24px -14px var(--lime-glow)}
 .slot.range{background:rgba(200,255,46,.2);border-color:rgba(200,255,46,.55)}
-.slot[aria-pressed="true"]{background:var(--lime);border-color:var(--lime);color:var(--on-lime);animation:slotGlow 2.2s ease-in-out infinite}
+.slot[aria-pressed="true"]{background:var(--lime);border-color:var(--lime);color:var(--on-lime);box-shadow:0 0 0 4px rgba(200,255,46,.16),0 0 30px rgba(200,255,46,.55)}
 .slot[aria-pressed="true"] small{color:var(--on-lime)}
 .slot:disabled{cursor:not-allowed;color:var(--dim);background:repeating-linear-gradient(135deg,transparent 0 6px,rgba(255,255,255,.025) 6px 12px);border-style:dashed}
 .slot:disabled small{color:var(--dim)}
-@keyframes slotGlow{0%,100%{box-shadow:0 0 0 3px rgba(200,255,46,.16),0 0 24px rgba(200,255,46,.45)}50%{box-shadow:0 0 0 6px rgba(200,255,46,.08),0 0 40px rgba(200,255,46,.7)}}
 .legend{display:flex;flex-wrap:wrap;gap:16px;margin-top:16px;font-family:var(--f-mono);font-size:9.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--mist)}
 .legend span{display:inline-flex;align-items:center;gap:7px}
 .legend i{width:12px;height:12px;border-radius:4px;border:1px solid var(--line-2)}
@@ -465,7 +504,7 @@ section{position:relative}
 .g:hover .plus,.g:focus-visible .plus{transform:none}
 
 /* lightbox */
-.lb{position:fixed;inset:0;z-index:150;display:grid;grid-template-rows:auto minmax(0,1fr) auto;background:rgba(4,6,5,.95);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);opacity:0;visibility:hidden;transition:opacity .45s,visibility 0s .45s;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
+.lb{position:fixed;inset:0;z-index:150;display:grid;grid-template-rows:auto minmax(0,1fr) auto;background:rgba(4,6,5,.97);opacity:0;visibility:hidden;transition:opacity .45s,visibility 0s .45s;padding:env(safe-area-inset-top,0px) 0 env(safe-area-inset-bottom,0px)}
 .lb.open{opacity:1;visibility:visible;transition:opacity .45s,visibility 0s}
 .lb-top{display:flex;align-items:center;gap:14px;padding:16px var(--gutter)}
 .lb-count{font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;color:var(--lime)}
@@ -494,7 +533,7 @@ section{position:relative}
 .ev-facts span{display:inline-flex;align-items:center;gap:8px}
 .ev-facts .icon{width:16px;height:16px;color:var(--lime)}
 .ev-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line-2);border:1px solid var(--line-2);border-radius:16px;overflow:hidden;margin-bottom:20px}
-.ev-stats div{background:rgba(7,9,8,.78);padding:14px 16px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.ev-stats div{background:rgba(7,9,8,.86);padding:14px 16px}
 .ev-stats b{display:block;font-family:var(--f-display);font-weight:900;font-size:clamp(26px,2.6vw,38px);line-height:1;font-variant-numeric:tabular-nums}
 .ev-stats b.hl{color:var(--lime)}
 .ev-stats span{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--mist)}
@@ -534,11 +573,9 @@ section{position:relative}
 .plans{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;align-items:stretch}
 .plan{position:relative;display:flex;flex-direction:column;gap:22px;padding:28px 24px 24px;border-radius:var(--r-lg);border:1px solid var(--line);background:var(--pitch);isolation:isolate;transition:transform .55s var(--expo),border-color .5s,box-shadow .5s}
 .plan:hover{transform:translateY(-8px);border-color:rgba(200,255,46,.35);box-shadow:0 40px 80px -46px rgba(200,255,46,.5)}
-@property --ang{syntax:'<angle>';inherits:false;initial-value:0deg}
 .plan.rec{background:linear-gradient(180deg,rgba(200,255,46,.13),rgba(200,255,46,.015) 55%),var(--pitch);border-color:transparent}
-.plan.rec::before{content:"";position:absolute;inset:-1px;z-index:-1;border-radius:inherit;padding:1px;background:conic-gradient(from var(--ang),rgba(200,255,46,.15),var(--lime),rgba(200,255,46,.15) 40%,rgba(200,255,46,.15) 60%,var(--lime),rgba(200,255,46,.15));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;animation:spin 6s linear infinite}
+.plan.rec::before{content:"";position:absolute;inset:-1px;z-index:-1;border-radius:inherit;padding:1px;background:linear-gradient(165deg,var(--lime),rgba(200,255,46,.16) 34%,rgba(200,255,46,.16) 66%,var(--lime));-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude}
 .plan.rec{box-shadow:0 40px 90px -50px rgba(200,255,46,.7)}
-@keyframes spin{to{--ang:360deg}}
 .plan .tag{position:absolute;top:-13px;left:24px;height:26px;padding:0 12px;border-radius:999px;display:inline-flex;align-items:center;background:var(--lime);color:var(--on-lime);font-family:var(--f-mono);font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;box-shadow:0 0 20px var(--lime-glow)}
 .plan h3{margin:0;font-family:var(--f-display);font-weight:900;font-size:30px;line-height:1;text-transform:uppercase;letter-spacing:.02em}
 .plan .when{margin-top:8px;font-family:var(--f-mono);font-size:10px;letter-spacing:.08em;color:var(--mist);text-transform:uppercase}
@@ -622,7 +659,7 @@ section{position:relative}
 .cta-media{position:absolute;inset:-12% 0;z-index:-4}
 .cta-media img{width:100%;height:100%;object-fit:cover;object-position:50% 60%}
 .cta-shade{position:absolute;inset:0;z-index:-3;background:radial-gradient(70% 60% at 50% 45%,rgba(7,9,8,.25),rgba(7,9,8,.85) 75%),linear-gradient(180deg,var(--ink) 0%,rgba(7,9,8,0) 25%,rgba(7,9,8,0) 70%,var(--ink) 100%)}
-.cta-glow{position:absolute;left:50%;top:58%;z-index:-2;width:min(1100px,120vw);height:420px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(200,255,46,.32),rgba(200,255,46,0));filter:blur(20px);animation:breathe 5s ease-in-out infinite}
+.cta-glow{position:absolute;left:50%;top:58%;z-index:-2;width:min(1100px,120vw);height:420px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(closest-side,rgba(200,255,46,.3),rgba(200,255,46,.08) 60%,rgba(200,255,46,0));animation:breathe 5s ease-in-out infinite;will-change:transform,opacity}
 @keyframes breathe{0%,100%{opacity:.55;transform:translate(-50%,-50%) scale(.92)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.06)}}
 .cta .beams{z-index:-2}
 .cta .wrap{width:100%}
@@ -633,13 +670,14 @@ section{position:relative}
 .cta h2 span{display:block}
 .cta h2 .hl{color:var(--lime);text-shadow:0 0 80px rgba(200,255,46,.5)}
 .cta p{font-size:clamp(17px,1.6vw,22px);color:var(--chalk);margin:34px auto 40px;max-width:34ch}
-.cta .btn-lg{animation:pulse 2.6s ease-in-out infinite}
-@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(200,255,46,.5),0 18px 50px -10px rgba(200,255,46,.7)}50%{box-shadow:0 0 0 18px rgba(200,255,46,0),0 18px 70px -6px rgba(200,255,46,.9)}}
+.cta-btn{position:relative;display:inline-block;border-radius:999px}
+.cta-btn::before,.cta-btn::after{content:"";position:absolute;inset:0;border-radius:inherit;border:2px solid var(--lime);opacity:0;pointer-events:none;animation:ring 2.6s cubic-bezier(.2,.8,.2,1) infinite}
+.cta-btn::after{animation-delay:1.3s}
+@keyframes ring{0%{opacity:.75;transform:scale(1)}100%{opacity:0;transform:scale(1.18,1.6)}}
+.cta .btn-lg{box-shadow:0 18px 60px -10px rgba(200,255,46,.8)}
 .skyline{position:absolute;left:0;right:0;bottom:0;z-index:-1;width:100%;height:auto;pointer-events:none}
-.skyline .city{fill:var(--ink);filter:drop-shadow(0 -1px 0 rgba(200,255,46,.45)) drop-shadow(0 -6px 14px rgba(200,255,46,.12))}
+.skyline .city{fill:var(--ink);filter:drop-shadow(0 -1px 0 rgba(200,255,46,.45))}
 .skyline .win{fill:var(--flood);opacity:var(--o,.6)}
-.skyline .win.tw{animation:tw var(--d,5s) ease-in-out infinite}
-@keyframes tw{0%,100%{opacity:var(--o,.6)}50%{opacity:.08}}
 .skyline .clock{fill:none;stroke:var(--lime);stroke-width:1.4}
 
 /* ---------- footer ---------- */
@@ -664,11 +702,11 @@ section{position:relative}
 .totop:hover .icon{transform:rotate(-90deg) translateX(4px)}
 
 /* ---------- modals ---------- */
-.modal{position:fixed;inset:0;z-index:140;display:grid;place-items:center;padding:16px;background:rgba(4,6,5,.72);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);opacity:0;visibility:hidden;transition:opacity .4s,visibility 0s .4s}
+.modal{position:fixed;inset:0;z-index:140;display:grid;place-items:center;padding:16px;background:rgba(4,6,5,.86);opacity:0;visibility:hidden;transition:opacity .4s,visibility 0s .4s}
 .modal.open{opacity:1;visibility:visible;transition:opacity .4s,visibility 0s}
 .modal-card{position:relative;width:min(960px,100%);max-height:calc(100svh - 32px);overflow:auto;border-radius:var(--r-lg);background:var(--pitch);border:1px solid var(--line-2);box-shadow:0 60px 140px -30px rgba(0,0,0,.95);transform:translateY(30px) scale(.97);transition:transform .6s var(--expo)}
 .modal.open .modal-card{transform:none}
-.modal-x{position:absolute;top:14px;right:14px;z-index:3;width:44px;height:44px;background:rgba(7,9,8,.6);backdrop-filter:blur(8px)}
+.modal-x{position:absolute;top:14px;right:14px;z-index:3;width:44px;height:44px;background:rgba(7,9,8,.75)}
 .qv{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
 .qv-media{position:relative;min-height:420px}
 .qv-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -739,6 +777,7 @@ section{position:relative}
   .ev{grid-template-columns:1fr}
   .ev-img{height:200px}
 }
+@media (max-width:700px){.hero-media img{object-position:50% 45%}}
 @media (max-width:640px){
   :root{--nav-h:68px}
   .nav-cta{display:none}
@@ -832,7 +871,6 @@ section{position:relative}
   </defs>
 </svg>
 
-<div class="grain" aria-hidden="true"></div>
 <div class="progress" id="progress" aria-hidden="true"></div>
 <div class="cursor" id="cursor" aria-hidden="true"></div>
 
@@ -873,9 +911,12 @@ section{position:relative}
 <main>
 
 <!-- ================= HERO ================= -->
-<section class="hero intro" id="home" data-nav="home">
+<section class="hero" id="home" data-nav="home">
   <div class="hero-media" id="hero-media">
-    <img src="https://images.unsplash.com/photo-1544698310-74ea9d1c8258?auto=format&fit=crop&w=1920&q=68" alt="Footballer silhouetted under floodlights on a night turf" fetchpriority="high">
+    <picture>
+      <source media="(max-width:700px)" srcset="https://images.unsplash.com/photo-1544698310-74ea9d1c8258?auto=format&fit=crop&w=640&h=1140&q=60 640w, https://images.unsplash.com/photo-1544698310-74ea9d1c8258?auto=format&fit=crop&w=960&h=1700&q=60 960w" sizes="100vw">
+      <img src="https://images.unsplash.com/photo-1544698310-74ea9d1c8258?auto=format&fit=crop&w=1600&q=68" srcset="https://images.unsplash.com/photo-1544698310-74ea9d1c8258?auto=format&fit=crop&w=1280&q=68 1280w, https://images.unsplash.com/photo-1544698310-74ea9d1c8258?auto=format&fit=crop&w=1600&q=68 1600w, https://images.unsplash.com/photo-1544698310-74ea9d1c8258?auto=format&fit=crop&w=1920&q=68 1920w" sizes="100vw" alt="Footballer silhouetted under floodlights on a night turf" fetchpriority="high">
+    </picture>
   </div>
   <div class="hero-shade"></div>
   <div class="beams" aria-hidden="true"><div class="beam b1"></div><div class="beam b2"></div><div class="beam b3"></div></div>
@@ -1091,32 +1132,32 @@ section{position:relative}
     </div>
     <div class="sports">
       <a class="sport s-football" href="#book" data-sport="Football" data-reveal>
-        <img src="https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a?auto=format&fit=crop&w=1400&h=1300&q=70" alt="Striker shooting at goal under night lights" loading="lazy" decoding="async">
+        <img src="https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a?auto=format&fit=crop&w=1400&h=1300&q=70" srcset="https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a?auto=format&fit=crop&w=700&h=650&q=70 700w, https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a?auto=format&fit=crop&w=1050&h=975&q=70 1050w, https://images.unsplash.com/photo-1517927033932-b3d18e61fb3a?auto=format&fit=crop&w=1400&h=1300&q=70 1400w" sizes="(max-width:900px) 92vw, min(48vw, 640px)" alt="Striker shooting at goal under night lights" loading="lazy" decoding="async">
         <div class="sport-top"><span class="badge"><span class="d"></span>9 venues</span><span class="sport-ic"><svg class="icon"><use href="#i-ball"/></svg></span></div>
         <div class="sport-c"><h3>Football</h3><div class="meta">5-a-side · 7-a-side · futsal</div><span class="sport-go">Book football <svg class="icon"><use href="#i-arrow"/></svg></span></div>
       </a>
       <a class="sport s-cricket" href="#book" data-sport="Cricket" data-reveal>
-        <img src="https://images.unsplash.com/photo-1593341646782-e0b495cff86d?auto=format&fit=crop&w=1200&h=700&q=70" alt="Batsman hitting a cricket ball" loading="lazy" decoding="async">
+        <img src="https://images.unsplash.com/photo-1593341646782-e0b495cff86d?auto=format&fit=crop&w=1200&h=700&q=70" srcset="https://images.unsplash.com/photo-1593341646782-e0b495cff86d?auto=format&fit=crop&w=600&h=350&q=70 600w, https://images.unsplash.com/photo-1593341646782-e0b495cff86d?auto=format&fit=crop&w=900&h=525&q=70 900w, https://images.unsplash.com/photo-1593341646782-e0b495cff86d?auto=format&fit=crop&w=1200&h=700&q=70 1200w" sizes="(max-width:640px) 92vw, (max-width:900px) 46vw, min(48vw, 640px)" alt="Batsman hitting a cricket ball" loading="lazy" decoding="async">
         <div class="sport-top"><span class="badge"><span class="d"></span>6 venues</span><span class="sport-ic"><svg class="icon"><use href="#i-bat"/></svg></span></div>
         <div class="sport-c"><h3>Cricket</h3><div class="meta">Box cricket · bowling machine · nets</div><span class="sport-go">Book cricket <svg class="icon"><use href="#i-arrow"/></svg></span></div>
       </a>
       <a class="sport s-badminton" href="#book" data-sport="Badminton" data-reveal>
-        <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=900&h=800&q=70" alt="Badminton player jumping for a smash on an indoor court" loading="lazy" decoding="async">
+        <img src="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=900&h=800&q=70" srcset="https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=450&h=400&q=70 450w, https://images.unsplash.com/photo-1626224583764-f87db24ac4ea?auto=format&fit=crop&w=900&h=800&q=70 900w" sizes="(max-width:640px) 92vw, (max-width:900px) 46vw, min(24vw, 320px)" alt="Badminton player jumping for a smash on an indoor court" loading="lazy" decoding="async">
         <div class="sport-top"><span class="badge"><span class="d"></span>Indoor</span><span class="sport-ic"><svg class="icon"><use href="#i-shuttle"/></svg></span></div>
         <div class="sport-c"><h3>Badminton</h3><div class="meta">Synthetic courts · AC hall</div><span class="sport-go">Book a court <svg class="icon"><use href="#i-arrow"/></svg></span></div>
       </a>
       <a class="sport s-volley" href="#book" data-sport="Volleyball" data-reveal>
-        <img src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=900&h=800&q=70" alt="Beach volleyball players silhouetted at sunset" loading="lazy" decoding="async">
+        <img src="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=900&h=800&q=70" srcset="https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=450&h=400&q=70 450w, https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?auto=format&fit=crop&w=900&h=800&q=70 900w" sizes="(max-width:640px) 92vw, (max-width:900px) 46vw, min(24vw, 320px)" alt="Beach volleyball players silhouetted at sunset" loading="lazy" decoding="async">
         <div class="sport-top"><span class="badge"><span class="d"></span>Beach + court</span><span class="sport-ic"><svg class="icon"><use href="#i-vball"/></svg></span></div>
         <div class="sport-c"><h3>Volleyball</h3><div class="meta">Sand courts on ECR</div><span class="sport-go">Book a court <svg class="icon"><use href="#i-arrow"/></svg></span></div>
       </a>
       <a class="sport s-training" href="#book" data-sport="Football" data-reveal>
-        <img src="https://images.unsplash.com/photo-1652190416150-d501a60291b3?auto=format&fit=crop&w=1200&h=700&q=70" alt="Training balls and dummies laid out on a turf" loading="lazy" decoding="async">
+        <img src="https://images.unsplash.com/photo-1652190416150-d501a60291b3?auto=format&fit=crop&w=1200&h=700&q=70" srcset="https://images.unsplash.com/photo-1652190416150-d501a60291b3?auto=format&fit=crop&w=600&h=350&q=70 600w, https://images.unsplash.com/photo-1652190416150-d501a60291b3?auto=format&fit=crop&w=900&h=525&q=70 900w, https://images.unsplash.com/photo-1652190416150-d501a60291b3?auto=format&fit=crop&w=1200&h=700&q=70 1200w" sizes="(max-width:640px) 92vw, (max-width:900px) 46vw, min(48vw, 640px)" alt="Training balls and dummies laid out on a turf" loading="lazy" decoding="async">
         <div class="sport-top"><span class="badge"><span class="d"></span>Coaching</span><span class="sport-ic"><svg class="icon"><use href="#i-run"/></svg></span></div>
         <div class="sport-c"><h3>Training</h3><div class="meta">Academies · fitness drills · 1-on-1 coaching</div><span class="sport-go">Book a session <svg class="icon"><use href="#i-arrow"/></svg></span></div>
       </a>
       <a class="sport s-tour" href="#events" data-link data-reveal>
-        <img src="https://images.unsplash.com/photo-1787536042975-8ff60e86f761?auto=format&fit=crop&w=1200&h=700&q=70" alt="Football team celebrating a win on the pitch" loading="lazy" decoding="async">
+        <img src="https://images.unsplash.com/photo-1787536042975-8ff60e86f761?auto=format&fit=crop&w=1200&h=700&q=70" srcset="https://images.unsplash.com/photo-1787536042975-8ff60e86f761?auto=format&fit=crop&w=600&h=350&q=70 600w, https://images.unsplash.com/photo-1787536042975-8ff60e86f761?auto=format&fit=crop&w=900&h=525&q=70 900w, https://images.unsplash.com/photo-1787536042975-8ff60e86f761?auto=format&fit=crop&w=1200&h=700&q=70 1200w" sizes="(max-width:900px) 92vw, min(48vw, 640px)" alt="Football team celebrating a win on the pitch" loading="lazy" decoding="async">
         <div class="sport-top"><span class="badge"><span class="d"></span>3 upcoming</span><span class="sport-ic"><svg class="icon"><use href="#i-trophy"/></svg></span></div>
         <div class="sport-c"><h3>Tournaments</h3><div class="meta">Monthly cups · corporate leagues</div><span class="sport-go">See tournaments <svg class="icon"><use href="#i-arrow"/></svg></span></div>
       </a>
@@ -1238,7 +1279,7 @@ section{position:relative}
       </div>
 
       <aside class="summary" id="summary" aria-label="Booking summary">
-        <div class="sum-media"><img id="sum-img" alt=""><div class="cap"><b id="sum-name">Choose a turf</b><span id="sum-area"></span></div></div>
+        <div class="sum-media"><img id="sum-img" alt="" loading="lazy" decoding="async"><div class="cap"><b id="sum-name">Choose a turf</b><span id="sum-area"></span></div></div>
         <div class="sum-body">
           <div class="sum-step"><span class="n">6</span>Confirm booking</div>
           <dl class="sum-rows">
@@ -1274,26 +1315,26 @@ section{position:relative}
       </div>
     </div>
     <div class="gallery" id="gallery-grid" data-cursor="View">
-      <button class="g mw" style="--c:1/4;--r:1/4" data-full="https://images.unsplash.com/photo-1706675780107-7c43cc487928?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1706675780107-7c43cc487928?auto=format&fit=crop&w=1000&h=820&q=65" alt="Floodlit stadium during a night match" loading="lazy" decoding="async"></span><span class="cap">Matchday under the lights</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
-      <button class="g" style="--c:4/7;--r:1/3" data-full="https://images.unsplash.com/photo-1641159009736-8a5fd4e52fef?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1641159009736-8a5fd4e52fef?auto=format&fit=crop&w=1000&h=560&q=65" alt="Team huddle on the pitch before kick-off" loading="lazy" decoding="async"></span><span class="cap">Team talk before kick-off</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
-      <button class="g" style="--c:4/6;--r:3/4" data-full="https://images.unsplash.com/photo-1704633785114-52104ce3d626?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1704633785114-52104ce3d626?auto=format&fit=crop&w=800&h=330&q=65" alt="Close-up of white lines on artificial turf" loading="lazy" decoding="async"></span><span class="cap">Turf detail · centre circle</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
-      <button class="g" style="--c:6/7;--r:3/4" data-full="https://images.unsplash.com/photo-1702467430182-f955bb8ced5b?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1702467430182-f955bb8ced5b?auto=format&fit=crop&w=500&h=400&q=65" alt="Footballs resting in the goal net" loading="lazy" decoding="async"></span><span class="cap">Back of the net</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
-      <button class="g mt" style="--c:1/3;--r:4/7" data-full="https://images.unsplash.com/photo-1752614654887-0b8d59c076b0?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1752614654887-0b8d59c076b0?auto=format&fit=crop&w=800&h=980&q=65" alt="Players chasing the ball during a match" loading="lazy" decoding="async"></span><span class="cap">First touch · 7-a-side</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
-      <button class="g mw" style="--c:3/7;--r:4/6" data-full="https://images.unsplash.com/photo-1509077613385-f89402467146?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1509077613385-f89402467146?auto=format&fit=crop&w=1200&h=520&q=65" alt="Aerial view of a five-a-side game on green turf" loading="lazy" decoding="async"></span><span class="cap">Aerial · Sunday league</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
-      <button class="g" style="--c:3/5;--r:6/7" data-full="https://images.unsplash.com/photo-1676498110083-89a7f89e8f88?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1676498110083-89a7f89e8f88?auto=format&fit=crop&w=800&h=330&q=65" alt="Dressing room with match shirts hanging" loading="lazy" decoding="async"></span><span class="cap">Dressing room · kit ready</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
-      <button class="g" style="--c:5/7;--r:6/7" data-full="https://images.unsplash.com/photo-1459865264687-595d652de67e?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1459865264687-595d652de67e?auto=format&fit=crop&w=800&h=330&q=65" alt="Fresh white line on green grass" loading="lazy" decoding="async"></span><span class="cap">Fresh chalk lines</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
-      <button class="g mw" style="--c:1/4;--r:7/9" data-full="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=1000&h=560&q=65" alt="Cricket ground under floodlights at dusk" loading="lazy" decoding="async"></span><span class="cap">Cricket under floodlights</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
-      <button class="g mt" style="--c:4/5;--r:7/10" data-full="https://images.unsplash.com/photo-1722087642932-9b070e9a066e?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1722087642932-9b070e9a066e?auto=format&fit=crop&w=500&h=1100&q=65" alt="Badminton player mid-air for a smash" loading="lazy" decoding="async"></span><span class="cap">Badminton · jump smash</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
-      <button class="g" style="--c:5/7;--r:7/9" data-full="https://images.unsplash.com/photo-1752681305099-89eab8580496?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1752681305099-89eab8580496?auto=format&fit=crop&w=800&h=650&q=65" alt="Teammates hugging after a win" loading="lazy" decoding="async"></span><span class="cap">Final whistle</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
-      <button class="g" style="--c:1/3;--r:9/10" data-full="https://images.unsplash.com/photo-1534405111774-ade5c6e8f02d?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1534405111774-ade5c6e8f02d?auto=format&fit=crop&w=800&h=330&q=65" alt="Wooden benches in a changing room" loading="lazy" decoding="async"></span><span class="cap">Changing rooms</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
-      <button class="g" style="--c:3/4;--r:9/10" data-full="https://images.unsplash.com/photo-1516567727245-ad8c68f3ec93?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1516567727245-ad8c68f3ec93?auto=format&fit=crop&w=500&h=400&q=65" alt="Match ball resting on the turf line" loading="lazy" decoding="async"></span><span class="cap">Match ball</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
-      <button class="g" style="--c:5/7;--r:9/10" data-full="https://images.unsplash.com/photo-1745997632518-7710e9b5e699?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1745997632518-7710e9b5e699?auto=format&fit=crop&w=800&h=330&q=65" alt="Stadium floodlight beam over a night match" loading="lazy" decoding="async"></span><span class="cap">Floodlights at full power</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
-      <button class="g" style="--c:1/3;--r:10/12" data-full="https://images.unsplash.com/photo-1748111405983-d1b10316eb83?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1748111405983-d1b10316eb83?auto=format&fit=crop&w=800&h=650&q=65" alt="Football squad posing for a team photo" loading="lazy" decoding="async"></span><span class="cap">Squad photo</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
-      <button class="g" style="--c:1/3;--r:12/13" data-full="https://images.unsplash.com/photo-1738682862786-fe51b2cf545a?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1738682862786-fe51b2cf545a?auto=format&fit=crop&w=800&h=330&q=65" alt="Floodlights glowing through fog over a pitch" loading="lazy" decoding="async"></span><span class="cap">Late-night fog over the pitch</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
-      <button class="g mw" style="--c:3/7;--r:10/13" data-full="https://images.unsplash.com/photo-1631194758628-71ec7c35137e?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1631194758628-71ec7c35137e?auto=format&fit=crop&w=1200&h=740&q=65" alt="Friends with a cricket bat silhouetted at sunset" loading="lazy" decoding="async"></span><span class="cap">Sunset cricket</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
-      <button class="g" style="--c:1/3;--r:13/15" data-full="https://images.unsplash.com/photo-1483861911361-57d334ad765b?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1483861911361-57d334ad765b?auto=format&fit=crop&w=800&h=650&q=65" alt="Steel lockers and benches in a locker room" loading="lazy" decoding="async"></span><span class="cap">Lockers and showers</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
-      <button class="g" style="--c:3/5;--r:13/15" data-full="https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?auto=format&fit=crop&w=800&h=650&q=65" alt="Close-up of a player striking the ball" loading="lazy" decoding="async"></span><span class="cap">Strike</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
-      <button class="g" style="--c:5/7;--r:13/15" data-full="https://images.unsplash.com/photo-1551390415-0de411440ca3?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1551390415-0de411440ca3?auto=format&fit=crop&w=800&h=650&q=65" alt="Fans with flags behind a team on derby night" loading="lazy" decoding="async"></span><span class="cap">Derby night crowd</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
+      <button class="g mw" style="--c:1/4;--r:1/4" data-full="https://images.unsplash.com/photo-1706675780107-7c43cc487928?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1706675780107-7c43cc487928?auto=format&fit=crop&w=1000&h=820&q=65" srcset="https://images.unsplash.com/photo-1706675780107-7c43cc487928?auto=format&fit=crop&w=500&h=410&q=65 500w, https://images.unsplash.com/photo-1706675780107-7c43cc487928?auto=format&fit=crop&w=750&h=615&q=65 750w, https://images.unsplash.com/photo-1706675780107-7c43cc487928?auto=format&fit=crop&w=1000&h=820&q=65 1000w" sizes="(max-width:900px) 92vw, min(66vw, 880px)" alt="Floodlit stadium during a night match" loading="lazy" decoding="async"></span><span class="cap">Matchday under the lights</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
+      <button class="g" style="--c:4/7;--r:1/3" data-full="https://images.unsplash.com/photo-1641159009736-8a5fd4e52fef?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1641159009736-8a5fd4e52fef?auto=format&fit=crop&w=1000&h=560&q=65" srcset="https://images.unsplash.com/photo-1641159009736-8a5fd4e52fef?auto=format&fit=crop&w=500&h=280&q=65 500w, https://images.unsplash.com/photo-1641159009736-8a5fd4e52fef?auto=format&fit=crop&w=750&h=420&q=65 750w, https://images.unsplash.com/photo-1641159009736-8a5fd4e52fef?auto=format&fit=crop&w=1000&h=560&q=65 1000w" sizes="(max-width:900px) 46vw, min(33vw, 440px)" alt="Team huddle on the pitch before kick-off" loading="lazy" decoding="async"></span><span class="cap">Team talk before kick-off</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
+      <button class="g" style="--c:4/6;--r:3/4" data-full="https://images.unsplash.com/photo-1704633785114-52104ce3d626?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1704633785114-52104ce3d626?auto=format&fit=crop&w=800&h=330&q=65" srcset="https://images.unsplash.com/photo-1704633785114-52104ce3d626?auto=format&fit=crop&w=400&h=165&q=65 400w, https://images.unsplash.com/photo-1704633785114-52104ce3d626?auto=format&fit=crop&w=800&h=330&q=65 800w" sizes="(max-width:900px) 46vw, min(33vw, 440px)" alt="Close-up of white lines on artificial turf" loading="lazy" decoding="async"></span><span class="cap">Turf detail · centre circle</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
+      <button class="g" style="--c:6/7;--r:3/4" data-full="https://images.unsplash.com/photo-1702467430182-f955bb8ced5b?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1702467430182-f955bb8ced5b?auto=format&fit=crop&w=500&h=400&q=65" srcset="https://images.unsplash.com/photo-1702467430182-f955bb8ced5b?auto=format&fit=crop&w=250&h=200&q=65 250w, https://images.unsplash.com/photo-1702467430182-f955bb8ced5b?auto=format&fit=crop&w=500&h=400&q=65 500w" sizes="(max-width:900px) 46vw, min(33vw, 440px)" alt="Footballs resting in the goal net" loading="lazy" decoding="async"></span><span class="cap">Back of the net</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
+      <button class="g mt" style="--c:1/3;--r:4/7" data-full="https://images.unsplash.com/photo-1752614654887-0b8d59c076b0?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1752614654887-0b8d59c076b0?auto=format&fit=crop&w=800&h=980&q=65" srcset="https://images.unsplash.com/photo-1752614654887-0b8d59c076b0?auto=format&fit=crop&w=400&h=490&q=65 400w, https://images.unsplash.com/photo-1752614654887-0b8d59c076b0?auto=format&fit=crop&w=800&h=980&q=65 800w" sizes="(max-width:900px) 46vw, min(33vw, 440px)" alt="Players chasing the ball during a match" loading="lazy" decoding="async"></span><span class="cap">First touch · 7-a-side</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
+      <button class="g mw" style="--c:3/7;--r:4/6" data-full="https://images.unsplash.com/photo-1509077613385-f89402467146?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1509077613385-f89402467146?auto=format&fit=crop&w=1200&h=520&q=65" srcset="https://images.unsplash.com/photo-1509077613385-f89402467146?auto=format&fit=crop&w=600&h=260&q=65 600w, https://images.unsplash.com/photo-1509077613385-f89402467146?auto=format&fit=crop&w=900&h=390&q=65 900w, https://images.unsplash.com/photo-1509077613385-f89402467146?auto=format&fit=crop&w=1200&h=520&q=65 1200w" sizes="(max-width:900px) 92vw, min(66vw, 880px)" alt="Aerial view of a five-a-side game on green turf" loading="lazy" decoding="async"></span><span class="cap">Aerial · Sunday league</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
+      <button class="g" style="--c:3/5;--r:6/7" data-full="https://images.unsplash.com/photo-1676498110083-89a7f89e8f88?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1676498110083-89a7f89e8f88?auto=format&fit=crop&w=800&h=330&q=65" srcset="https://images.unsplash.com/photo-1676498110083-89a7f89e8f88?auto=format&fit=crop&w=400&h=165&q=65 400w, https://images.unsplash.com/photo-1676498110083-89a7f89e8f88?auto=format&fit=crop&w=800&h=330&q=65 800w" sizes="(max-width:900px) 46vw, min(33vw, 440px)" alt="Dressing room with match shirts hanging" loading="lazy" decoding="async"></span><span class="cap">Dressing room · kit ready</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
+      <button class="g" style="--c:5/7;--r:6/7" data-full="https://images.unsplash.com/photo-1459865264687-595d652de67e?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1459865264687-595d652de67e?auto=format&fit=crop&w=800&h=330&q=65" srcset="https://images.unsplash.com/photo-1459865264687-595d652de67e?auto=format&fit=crop&w=400&h=165&q=65 400w, https://images.unsplash.com/photo-1459865264687-595d652de67e?auto=format&fit=crop&w=800&h=330&q=65 800w" sizes="(max-width:900px) 46vw, min(33vw, 440px)" alt="Fresh white line on green grass" loading="lazy" decoding="async"></span><span class="cap">Fresh chalk lines</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
+      <button class="g mw" style="--c:1/4;--r:7/9" data-full="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=1000&h=560&q=65" srcset="https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=500&h=280&q=65 500w, https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=750&h=420&q=65 750w, https://images.unsplash.com/photo-1540747913346-19e32dc3e97e?auto=format&fit=crop&w=1000&h=560&q=65 1000w" sizes="(max-width:900px) 92vw, min(66vw, 880px)" alt="Cricket ground under floodlights at dusk" loading="lazy" decoding="async"></span><span class="cap">Cricket under floodlights</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
+      <button class="g mt" style="--c:4/5;--r:7/10" data-full="https://images.unsplash.com/photo-1722087642932-9b070e9a066e?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1722087642932-9b070e9a066e?auto=format&fit=crop&w=500&h=1100&q=65" srcset="https://images.unsplash.com/photo-1722087642932-9b070e9a066e?auto=format&fit=crop&w=250&h=550&q=65 250w, https://images.unsplash.com/photo-1722087642932-9b070e9a066e?auto=format&fit=crop&w=500&h=1100&q=65 500w" sizes="(max-width:900px) 46vw, min(33vw, 440px)" alt="Badminton player mid-air for a smash" loading="lazy" decoding="async"></span><span class="cap">Badminton · jump smash</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
+      <button class="g" style="--c:5/7;--r:7/9" data-full="https://images.unsplash.com/photo-1752681305099-89eab8580496?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1752681305099-89eab8580496?auto=format&fit=crop&w=800&h=650&q=65" srcset="https://images.unsplash.com/photo-1752681305099-89eab8580496?auto=format&fit=crop&w=400&h=325&q=65 400w, https://images.unsplash.com/photo-1752681305099-89eab8580496?auto=format&fit=crop&w=800&h=650&q=65 800w" sizes="(max-width:900px) 46vw, min(33vw, 440px)" alt="Teammates hugging after a win" loading="lazy" decoding="async"></span><span class="cap">Final whistle</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
+      <button class="g" style="--c:1/3;--r:9/10" data-full="https://images.unsplash.com/photo-1534405111774-ade5c6e8f02d?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1534405111774-ade5c6e8f02d?auto=format&fit=crop&w=800&h=330&q=65" srcset="https://images.unsplash.com/photo-1534405111774-ade5c6e8f02d?auto=format&fit=crop&w=400&h=165&q=65 400w, https://images.unsplash.com/photo-1534405111774-ade5c6e8f02d?auto=format&fit=crop&w=800&h=330&q=65 800w" sizes="(max-width:900px) 46vw, min(33vw, 440px)" alt="Wooden benches in a changing room" loading="lazy" decoding="async"></span><span class="cap">Changing rooms</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
+      <button class="g" style="--c:3/4;--r:9/10" data-full="https://images.unsplash.com/photo-1516567727245-ad8c68f3ec93?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1516567727245-ad8c68f3ec93?auto=format&fit=crop&w=500&h=400&q=65" srcset="https://images.unsplash.com/photo-1516567727245-ad8c68f3ec93?auto=format&fit=crop&w=250&h=200&q=65 250w, https://images.unsplash.com/photo-1516567727245-ad8c68f3ec93?auto=format&fit=crop&w=500&h=400&q=65 500w" sizes="(max-width:900px) 46vw, min(33vw, 440px)" alt="Match ball resting on the turf line" loading="lazy" decoding="async"></span><span class="cap">Match ball</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
+      <button class="g" style="--c:5/7;--r:9/10" data-full="https://images.unsplash.com/photo-1745997632518-7710e9b5e699?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1745997632518-7710e9b5e699?auto=format&fit=crop&w=800&h=330&q=65" srcset="https://images.unsplash.com/photo-1745997632518-7710e9b5e699?auto=format&fit=crop&w=400&h=165&q=65 400w, https://images.unsplash.com/photo-1745997632518-7710e9b5e699?auto=format&fit=crop&w=800&h=330&q=65 800w" sizes="(max-width:900px) 46vw, min(33vw, 440px)" alt="Stadium floodlight beam over a night match" loading="lazy" decoding="async"></span><span class="cap">Floodlights at full power</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
+      <button class="g" style="--c:1/3;--r:10/12" data-full="https://images.unsplash.com/photo-1748111405983-d1b10316eb83?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1748111405983-d1b10316eb83?auto=format&fit=crop&w=800&h=650&q=65" srcset="https://images.unsplash.com/photo-1748111405983-d1b10316eb83?auto=format&fit=crop&w=400&h=325&q=65 400w, https://images.unsplash.com/photo-1748111405983-d1b10316eb83?auto=format&fit=crop&w=800&h=650&q=65 800w" sizes="(max-width:900px) 46vw, min(33vw, 440px)" alt="Football squad posing for a team photo" loading="lazy" decoding="async"></span><span class="cap">Squad photo</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
+      <button class="g" style="--c:1/3;--r:12/13" data-full="https://images.unsplash.com/photo-1738682862786-fe51b2cf545a?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1738682862786-fe51b2cf545a?auto=format&fit=crop&w=800&h=330&q=65" srcset="https://images.unsplash.com/photo-1738682862786-fe51b2cf545a?auto=format&fit=crop&w=400&h=165&q=65 400w, https://images.unsplash.com/photo-1738682862786-fe51b2cf545a?auto=format&fit=crop&w=800&h=330&q=65 800w" sizes="(max-width:900px) 46vw, min(33vw, 440px)" alt="Floodlights glowing through fog over a pitch" loading="lazy" decoding="async"></span><span class="cap">Late-night fog over the pitch</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
+      <button class="g mw" style="--c:3/7;--r:10/13" data-full="https://images.unsplash.com/photo-1631194758628-71ec7c35137e?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1631194758628-71ec7c35137e?auto=format&fit=crop&w=1200&h=740&q=65" srcset="https://images.unsplash.com/photo-1631194758628-71ec7c35137e?auto=format&fit=crop&w=600&h=370&q=65 600w, https://images.unsplash.com/photo-1631194758628-71ec7c35137e?auto=format&fit=crop&w=900&h=555&q=65 900w, https://images.unsplash.com/photo-1631194758628-71ec7c35137e?auto=format&fit=crop&w=1200&h=740&q=65 1200w" sizes="(max-width:900px) 92vw, min(66vw, 880px)" alt="Friends with a cricket bat silhouetted at sunset" loading="lazy" decoding="async"></span><span class="cap">Sunset cricket</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
+      <button class="g" style="--c:1/3;--r:13/15" data-full="https://images.unsplash.com/photo-1483861911361-57d334ad765b?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1483861911361-57d334ad765b?auto=format&fit=crop&w=800&h=650&q=65" srcset="https://images.unsplash.com/photo-1483861911361-57d334ad765b?auto=format&fit=crop&w=400&h=325&q=65 400w, https://images.unsplash.com/photo-1483861911361-57d334ad765b?auto=format&fit=crop&w=800&h=650&q=65 800w" sizes="(max-width:900px) 46vw, min(33vw, 440px)" alt="Steel lockers and benches in a locker room" loading="lazy" decoding="async"></span><span class="cap">Lockers and showers</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
+      <button class="g" style="--c:3/5;--r:13/15" data-full="https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?auto=format&fit=crop&w=800&h=650&q=65" srcset="https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?auto=format&fit=crop&w=400&h=325&q=65 400w, https://images.unsplash.com/photo-1606925797300-0b35e9d1794e?auto=format&fit=crop&w=800&h=650&q=65 800w" sizes="(max-width:900px) 46vw, min(33vw, 440px)" alt="Close-up of a player striking the ball" loading="lazy" decoding="async"></span><span class="cap">Strike</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
+      <button class="g" style="--c:5/7;--r:13/15" data-full="https://images.unsplash.com/photo-1551390415-0de411440ca3?auto=format&fit=crop&w=1600&q=70"><span class="gi"><img src="https://images.unsplash.com/photo-1551390415-0de411440ca3?auto=format&fit=crop&w=800&h=650&q=65" srcset="https://images.unsplash.com/photo-1551390415-0de411440ca3?auto=format&fit=crop&w=400&h=325&q=65 400w, https://images.unsplash.com/photo-1551390415-0de411440ca3?auto=format&fit=crop&w=800&h=650&q=65 800w" sizes="(max-width:900px) 46vw, min(33vw, 440px)" alt="Fans with flags behind a team on derby night" loading="lazy" decoding="async"></span><span class="cap">Derby night crowd</span><span class="plus"><svg class="icon"><use href="#i-plus"/></svg></span></button>
     </div>
   </div>
 </section>
@@ -1312,7 +1353,7 @@ section{position:relative}
     </div>
     <div class="events">
       <article class="ev-main" data-reveal>
-        <img src="https://images.unsplash.com/photo-1745997645080-941f962f1392?auto=format&fit=crop&w=1400&h=1100&q=70" alt="Football match in a stadium under floodlights" loading="lazy" decoding="async" data-parallax>
+        <img src="https://images.unsplash.com/photo-1745997645080-941f962f1392?auto=format&fit=crop&w=1400&h=1100&q=70" srcset="https://images.unsplash.com/photo-1745997645080-941f962f1392?auto=format&fit=crop&w=700&h=550&q=70 700w, https://images.unsplash.com/photo-1745997645080-941f962f1392?auto=format&fit=crop&w=1050&h=825&q=70 1050w, https://images.unsplash.com/photo-1745997645080-941f962f1392?auto=format&fit=crop&w=1400&h=1100&q=70 1400w" sizes="(max-width:1024px) 92vw, 760px" alt="Football match in a stadium under floodlights" loading="lazy" decoding="async" data-parallax>
         <div class="ev-tags">
           <span class="badge"><span class="d"></span>Registration open</span>
           <span class="badge"><svg class="icon"><use href="#i-ball"/></svg>5-a-side knockout</span>
@@ -1346,7 +1387,7 @@ section{position:relative}
       </article>
       <div class="ev-side">
         <article class="ev" data-reveal>
-          <div class="ev-img"><img src="https://images.unsplash.com/photo-1512719994953-eabf50895df7?auto=format&fit=crop&w=800&h=800&q=70" alt="Cricket ground at dusk" loading="lazy" decoding="async"><span class="badge warn"><span class="d"></span>Filling fast</span></div>
+          <div class="ev-img"><img src="https://images.unsplash.com/photo-1512719994953-eabf50895df7?auto=format&fit=crop&w=800&h=800&q=70" srcset="https://images.unsplash.com/photo-1512719994953-eabf50895df7?auto=format&fit=crop&w=400&h=400&q=70 400w, https://images.unsplash.com/photo-1512719994953-eabf50895df7?auto=format&fit=crop&w=800&h=800&q=70 800w" sizes="(max-width:900px) 92vw, 240px" alt="Cricket ground at dusk" loading="lazy" decoding="async"><span class="badge warn"><span class="d"></span>Filling fast</span></div>
           <div class="ev-body">
             <h3>OMR Corporate Cricket League</h3>
             <div class="facts">
@@ -1362,7 +1403,7 @@ section{position:relative}
           </div>
         </article>
         <article class="ev" data-reveal>
-          <div class="ev-img"><img src="https://images.unsplash.com/photo-1567880325673-ccc01edca61c?auto=format&fit=crop&w=800&h=800&q=70" alt="Beach volleyball spike at the net" loading="lazy" decoding="async"><span class="badge"><span class="d" style="background:var(--mist);box-shadow:none"></span>Opens 1 Dec</span></div>
+          <div class="ev-img"><img src="https://images.unsplash.com/photo-1567880325673-ccc01edca61c?auto=format&fit=crop&w=800&h=800&q=70" srcset="https://images.unsplash.com/photo-1567880325673-ccc01edca61c?auto=format&fit=crop&w=400&h=400&q=70 400w, https://images.unsplash.com/photo-1567880325673-ccc01edca61c?auto=format&fit=crop&w=800&h=800&q=70 800w" sizes="(max-width:900px) 92vw, 240px" alt="Beach volleyball spike at the net" loading="lazy" decoding="async"><span class="badge"><span class="d" style="background:var(--mist);box-shadow:none"></span>Opens 1 Dec</span></div>
           <div class="ev-body">
             <h3>Pongal Beach Volley Open</h3>
             <div class="facts">
@@ -1456,8 +1497,8 @@ section{position:relative}
   <div class="wrap">
     <div class="about-grid">
       <div class="about-media" data-reveal>
-        <div class="am-1"><img src="https://images.unsplash.com/photo-1752681304960-bd4e018a04bb?auto=format&fit=crop&w=1100&h=1300&q=70" alt="Football team huddled together on the pitch" loading="lazy" decoding="async" data-parallax></div>
-        <div class="am-2"><img src="https://images.unsplash.com/photo-1693683223591-59fb0ec0ce86?auto=format&fit=crop&w=600&h=600&q=70" alt="Player placing the ball on the turf" loading="lazy" decoding="async"></div>
+        <div class="am-1"><img src="https://images.unsplash.com/photo-1752681304960-bd4e018a04bb?auto=format&fit=crop&w=1100&h=1300&q=70" srcset="https://images.unsplash.com/photo-1752681304960-bd4e018a04bb?auto=format&fit=crop&w=550&h=650&q=70 550w, https://images.unsplash.com/photo-1752681304960-bd4e018a04bb?auto=format&fit=crop&w=825&h=975&q=70 825w, https://images.unsplash.com/photo-1752681304960-bd4e018a04bb?auto=format&fit=crop&w=1100&h=1300&q=70 1100w" sizes="(max-width:1024px) 80vw, 520px" alt="Football team huddled together on the pitch" loading="lazy" decoding="async" data-parallax></div>
+        <div class="am-2"><img src="https://images.unsplash.com/photo-1693683223591-59fb0ec0ce86?auto=format&fit=crop&w=600&h=600&q=70" srcset="https://images.unsplash.com/photo-1693683223591-59fb0ec0ce86?auto=format&fit=crop&w=300&h=300&q=70 300w, https://images.unsplash.com/photo-1693683223591-59fb0ec0ce86?auto=format&fit=crop&w=600&h=600&q=70 600w" sizes="(max-width:1024px) 40vw, 280px" alt="Player placing the ball on the turf" loading="lazy" decoding="async"></div>
         <div class="spinner" aria-hidden="true">
           <svg class="ring" viewBox="0 0 120 120"><defs><path id="circ" d="M60 60m-46 0a46 46 0 1 1 92 0a46 46 0 1 1-92 0"/></defs><text><textPath href="#circ">Play · Compete · Dominate · Chennai ·</textPath></text></svg>
           <span class="core"><svg class="icon"><use href="#i-ball"/></svg></span>
@@ -1519,25 +1560,25 @@ section{position:relative}
       </div>
     </div>
     <div class="ig-grid">
-      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1551958219-acbc608c6377?auto=format&fit=crop&w=600&h=600&q=68" alt="Three match balls on the turf" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>1.2k</span><span><svg class="icon"><use href="#i-comment"/></svg>48</span></div></span></a>
-      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1600679472829-3044539ce8ed?auto=format&fit=crop&w=600&h=600&q=68" alt="Player's boot resting on the ball" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>864</span><span><svg class="icon"><use href="#i-comment"/></svg>22</span></div></span></a>
-      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1708312604109-16c0be9326cd?auto=format&fit=crop&w=600&h=600&q=68" alt="Badminton racket and shuttlecocks" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>532</span><span><svg class="icon"><use href="#i-comment"/></svg>17</span></div></span></a>
-      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=600&h=600&q=68" alt="Red cricket ball on grass" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>2.1k</span><span><svg class="icon"><use href="#i-comment"/></svg>96</span></div></span></a>
-      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1559309106-ed14040fd35d?auto=format&fit=crop&w=600&h=600&q=68" alt="Badminton rackets crossed on grass" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>418</span><span><svg class="icon"><use href="#i-comment"/></svg>12</span></div></span></a>
-      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1570498839593-e565b39455fc?auto=format&fit=crop&w=600&h=600&q=68" alt="Football on a sunny pitch" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>977</span><span><svg class="icon"><use href="#i-comment"/></svg>31</span></div></span></a>
-      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1776345041033-5de39e8e4ebf?auto=format&fit=crop&w=600&h=600&q=68" alt="Two players embracing on the pitch" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>1.6k</span><span><svg class="icon"><use href="#i-comment"/></svg>64</span></div></span></a>
-      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1599747130279-e05a79d13958?auto=format&fit=crop&w=600&h=600&q=68" alt="Training balls stacked by a cone" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>705</span><span><svg class="icon"><use href="#i-comment"/></svg>19</span></div></span></a>
-      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1592656094267-764a45160876?auto=format&fit=crop&w=600&h=600&q=68" alt="Volleyball resting on beach sand" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>1.1k</span><span><svg class="icon"><use href="#i-comment"/></svg>40</span></div></span></a>
-      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1553627220-92f0446b6a5f?auto=format&fit=crop&w=600&h=600&q=68" alt="Futsal goal on an indoor court" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>389</span><span><svg class="icon"><use href="#i-comment"/></svg>9</span></div></span></a>
-      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1626721105368-a69248e93b32?auto=format&fit=crop&w=600&h=600&q=68" alt="Shuttlecock resting on the net" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>612</span><span><svg class="icon"><use href="#i-comment"/></svg>14</span></div></span></a>
-      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1529929344488-5e812ddb6e2a?auto=format&fit=crop&w=600&h=600&q=68" alt="Team huddle before a match" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>1.4k</span><span><svg class="icon"><use href="#i-comment"/></svg>52</span></div></span></a>
+      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1551958219-acbc608c6377?auto=format&fit=crop&w=600&h=600&q=68" srcset="https://images.unsplash.com/photo-1551958219-acbc608c6377?auto=format&fit=crop&w=300&h=300&q=68 300w, https://images.unsplash.com/photo-1551958219-acbc608c6377?auto=format&fit=crop&w=600&h=600&q=68 600w" sizes="(max-width:900px) 31vw, 300px" alt="Three match balls on the turf" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>1.2k</span><span><svg class="icon"><use href="#i-comment"/></svg>48</span></div></span></a>
+      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1600679472829-3044539ce8ed?auto=format&fit=crop&w=600&h=600&q=68" srcset="https://images.unsplash.com/photo-1600679472829-3044539ce8ed?auto=format&fit=crop&w=300&h=300&q=68 300w, https://images.unsplash.com/photo-1600679472829-3044539ce8ed?auto=format&fit=crop&w=600&h=600&q=68 600w" sizes="(max-width:900px) 31vw, 300px" alt="Player's boot resting on the ball" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>864</span><span><svg class="icon"><use href="#i-comment"/></svg>22</span></div></span></a>
+      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1708312604109-16c0be9326cd?auto=format&fit=crop&w=600&h=600&q=68" srcset="https://images.unsplash.com/photo-1708312604109-16c0be9326cd?auto=format&fit=crop&w=300&h=300&q=68 300w, https://images.unsplash.com/photo-1708312604109-16c0be9326cd?auto=format&fit=crop&w=600&h=600&q=68 600w" sizes="(max-width:900px) 31vw, 300px" alt="Badminton racket and shuttlecocks" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>532</span><span><svg class="icon"><use href="#i-comment"/></svg>17</span></div></span></a>
+      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=600&h=600&q=68" srcset="https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=300&h=300&q=68 300w, https://images.unsplash.com/photo-1531415074968-036ba1b575da?auto=format&fit=crop&w=600&h=600&q=68 600w" sizes="(max-width:900px) 31vw, 300px" alt="Red cricket ball on grass" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>2.1k</span><span><svg class="icon"><use href="#i-comment"/></svg>96</span></div></span></a>
+      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1559309106-ed14040fd35d?auto=format&fit=crop&w=600&h=600&q=68" srcset="https://images.unsplash.com/photo-1559309106-ed14040fd35d?auto=format&fit=crop&w=300&h=300&q=68 300w, https://images.unsplash.com/photo-1559309106-ed14040fd35d?auto=format&fit=crop&w=600&h=600&q=68 600w" sizes="(max-width:900px) 31vw, 300px" alt="Badminton rackets crossed on grass" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>418</span><span><svg class="icon"><use href="#i-comment"/></svg>12</span></div></span></a>
+      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1570498839593-e565b39455fc?auto=format&fit=crop&w=600&h=600&q=68" srcset="https://images.unsplash.com/photo-1570498839593-e565b39455fc?auto=format&fit=crop&w=300&h=300&q=68 300w, https://images.unsplash.com/photo-1570498839593-e565b39455fc?auto=format&fit=crop&w=600&h=600&q=68 600w" sizes="(max-width:900px) 31vw, 300px" alt="Football on a sunny pitch" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>977</span><span><svg class="icon"><use href="#i-comment"/></svg>31</span></div></span></a>
+      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1776345041033-5de39e8e4ebf?auto=format&fit=crop&w=600&h=600&q=68" srcset="https://images.unsplash.com/photo-1776345041033-5de39e8e4ebf?auto=format&fit=crop&w=300&h=300&q=68 300w, https://images.unsplash.com/photo-1776345041033-5de39e8e4ebf?auto=format&fit=crop&w=600&h=600&q=68 600w" sizes="(max-width:900px) 31vw, 300px" alt="Two players embracing on the pitch" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>1.6k</span><span><svg class="icon"><use href="#i-comment"/></svg>64</span></div></span></a>
+      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1599747130279-e05a79d13958?auto=format&fit=crop&w=600&h=600&q=68" srcset="https://images.unsplash.com/photo-1599747130279-e05a79d13958?auto=format&fit=crop&w=300&h=300&q=68 300w, https://images.unsplash.com/photo-1599747130279-e05a79d13958?auto=format&fit=crop&w=600&h=600&q=68 600w" sizes="(max-width:900px) 31vw, 300px" alt="Training balls stacked by a cone" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>705</span><span><svg class="icon"><use href="#i-comment"/></svg>19</span></div></span></a>
+      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1592656094267-764a45160876?auto=format&fit=crop&w=600&h=600&q=68" srcset="https://images.unsplash.com/photo-1592656094267-764a45160876?auto=format&fit=crop&w=300&h=300&q=68 300w, https://images.unsplash.com/photo-1592656094267-764a45160876?auto=format&fit=crop&w=600&h=600&q=68 600w" sizes="(max-width:900px) 31vw, 300px" alt="Volleyball resting on beach sand" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>1.1k</span><span><svg class="icon"><use href="#i-comment"/></svg>40</span></div></span></a>
+      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1553627220-92f0446b6a5f?auto=format&fit=crop&w=600&h=600&q=68" srcset="https://images.unsplash.com/photo-1553627220-92f0446b6a5f?auto=format&fit=crop&w=300&h=300&q=68 300w, https://images.unsplash.com/photo-1553627220-92f0446b6a5f?auto=format&fit=crop&w=600&h=600&q=68 600w" sizes="(max-width:900px) 31vw, 300px" alt="Futsal goal on an indoor court" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>389</span><span><svg class="icon"><use href="#i-comment"/></svg>9</span></div></span></a>
+      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1626721105368-a69248e93b32?auto=format&fit=crop&w=600&h=600&q=68" srcset="https://images.unsplash.com/photo-1626721105368-a69248e93b32?auto=format&fit=crop&w=300&h=300&q=68 300w, https://images.unsplash.com/photo-1626721105368-a69248e93b32?auto=format&fit=crop&w=600&h=600&q=68 600w" sizes="(max-width:900px) 31vw, 300px" alt="Shuttlecock resting on the net" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>612</span><span><svg class="icon"><use href="#i-comment"/></svg>14</span></div></span></a>
+      <a class="ig" href="https://www.instagram.com/" target="_blank" rel="noopener" data-reveal><img src="https://images.unsplash.com/photo-1529929344488-5e812ddb6e2a?auto=format&fit=crop&w=600&h=600&q=68" srcset="https://images.unsplash.com/photo-1529929344488-5e812ddb6e2a?auto=format&fit=crop&w=300&h=300&q=68 300w, https://images.unsplash.com/photo-1529929344488-5e812ddb6e2a?auto=format&fit=crop&w=600&h=600&q=68 600w" sizes="(max-width:900px) 31vw, 300px" alt="Team huddle before a match" loading="lazy" decoding="async"><svg class="icon igl"><use href="#i-ig"/></svg><span class="ig-ov"><div><span><svg class="icon fill"><use href="#i-heart"/></svg>1.4k</span><span><svg class="icon"><use href="#i-comment"/></svg>52</span></div></span></a>
     </div>
   </div>
 </section>
 
 <!-- ================= FINAL CTA ================= -->
 <section class="cta" id="cta" data-nav="contact">
-  <div class="cta-media"><img src="https://images.unsplash.com/photo-1487466365202-1afdb86c764e?auto=format&fit=crop&w=1800&q=65" alt="" loading="lazy" decoding="async" data-parallax-cta></div>
+  <div class="cta-media"><img src="https://images.unsplash.com/photo-1487466365202-1afdb86c764e?auto=format&fit=crop&w=1800&q=65" srcset="https://images.unsplash.com/photo-1487466365202-1afdb86c764e?auto=format&fit=crop&w=900&q=65 900w, https://images.unsplash.com/photo-1487466365202-1afdb86c764e?auto=format&fit=crop&w=1350&q=65 1350w, https://images.unsplash.com/photo-1487466365202-1afdb86c764e?auto=format&fit=crop&w=1800&q=65 1800w" sizes="100vw" alt="" loading="lazy" decoding="async" data-parallax-cta></div>
   <div class="cta-shade"></div>
   <div class="cta-glow" aria-hidden="true"></div>
   <div class="beams" aria-hidden="true"><div class="beam b1"></div><div class="beam b2"></div></div>
@@ -1545,7 +1586,7 @@ section{position:relative}
     <p class="eyebrow" style="justify-content:center">Tonight's slots are filling</p>
     <h2 data-split-cta><span>Ready to</span><span class="hl">play?</span></h2>
     <p>Your next game is only one booking away.</p>
-    <a class="btn btn-lime btn-lg" href="#book" data-link data-magnetic><span>Book your turf</span><span class="arr"><svg class="icon"><use href="#i-arrow"/></svg></span></a>
+    <span class="cta-btn"><a class="btn btn-lime btn-lg" href="#book" data-link data-magnetic><span>Book your turf</span><span class="arr"><svg class="icon"><use href="#i-arrow"/></svg></span></a></span>
   </div>
   <svg class="skyline" id="skyline" viewBox="0 0 1440 150" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
     <g class="city">
@@ -1656,11 +1697,8 @@ section{position:relative}
 </div>
 
 <div class="toast glass" id="toast" role="status" aria-live="polite"><span class="d"></span><span id="toast-msg"></span></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
-(() => {
+const __boot = () => {
 'use strict';
 
 /* ============================================================
@@ -1675,34 +1713,34 @@ const BRAND = 'FLOODLIT';
 const TURFS = [
   { id:'arena', name:'Chennai Arena Turf', area:'Velachery', areaKey:'velachery', sports:['Football','Cricket'], rating:4.8, reviews:612, price:699, open:6, close:25, status:'Available today', tone:'',
     format:'5-a-side & 7-a-side', pitches:2, size:'40 × 20 m · 50 × 30 m', surface:'50 mm FIFA-grade turf', lights:'420 lux LED', facilities:['flood','car','shower','cafe'],
-    img:'https://images.unsplash.com/photo-1630420598913-44208d36f9af?auto=format&fit=crop&w=800&h=1060&q=70' },
+    img:'1630420598913-44208d36f9af' },
   { id:'omr', name:'OMR Night Arena', area:'Thoraipakkam, OMR', areaKey:'omr', sports:['Football'], rating:4.9, reviews:845, price:799, open:6, close:25, status:'4 slots left tonight', tone:'warn',
     format:'7-a-side', pitches:2, size:'50 × 30 m', surface:'60 mm hybrid-feel turf', lights:'500 lux LED', facilities:['flood','car','shower','locker'],
-    img:'https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?auto=format&fit=crop&w=800&h=1060&q=70' },
+    img:'1431324155629-1a6deb1dec8d' },
   { id:'striker', name:"Striker's Den", area:'Sholinganallur', areaKey:'sholinganallur', sports:['Football','Cricket'], rating:4.7, reviews:402, price:699, open:5, close:25, status:'Available today', tone:'',
     format:'5-a-side cage', pitches:1, size:'36 × 18 m, fully netted', surface:'50 mm turf', lights:'400 lux LED', facilities:['flood','car','water','locker'],
-    img:'https://images.unsplash.com/photo-1630420598771-dd52ab08c8cb?auto=format&fit=crop&w=800&h=1060&q=70' },
+    img:'1630420598771-dd52ab08c8cb' },
   { id:'perungudi', name:'Perungudi Cricket Box', area:'Perungudi', areaKey:'perungudi', sports:['Cricket'], rating:4.8, reviews:521, price:899, open:6, close:24, status:'Bowling machine', tone:'',
     format:'Box cricket, 6 to 8 a side', pitches:1, size:'30 × 22 m, netted', surface:'Cricket-grade 25 mm turf', lights:'450 lux LED', facilities:['flood','car','water','locker'],
-    img:'https://images.unsplash.com/photo-1674986778924-7a33c1531443?auto=format&fit=crop&w=800&h=1060&q=70' },
+    img:'1674986778924-7a33c1531443' },
   { id:'adyar', name:'Adyar Kick Club', area:'Adyar', areaKey:'adyar', sports:['Football','Badminton'], rating:4.7, reviews:398, price:749, open:5, close:24, status:'Indoor · AC', tone:'',
     format:'Indoor futsal + 3 badminton courts', pitches:4, size:'Futsal 38 × 20 m', surface:'Sprung wooden floor', lights:'Indoor LED', facilities:['shower','car','cafe','locker'],
-    img:'https://images.unsplash.com/photo-1763775594018-4a84eeadd83d?auto=format&fit=crop&w=800&h=1060&q=70' },
+    img:'1763775594018-4a84eeadd83d' },
   { id:'tambaram', name:'Tambaram Turf Park', area:'Tambaram', areaKey:'tambaram', sports:['Football','Cricket'], rating:4.5, reviews:233, price:599, open:6, close:24, status:'Available today', tone:'',
     format:'7-a-side', pitches:2, size:'55 × 32 m', surface:'50 mm turf', lights:'400 lux LED', facilities:['flood','car','shower','water'],
-    img:'https://images.unsplash.com/photo-1517747614396-d21a78b850e8?auto=format&fit=crop&w=800&h=1060&q=70' },
+    img:'1517747614396-d21a78b850e8' },
   { id:'annanagar', name:'Anna Nagar Sports Hub', area:'Anna Nagar', areaKey:'annanagar', sports:['Football','Volleyball'], rating:4.6, reviews:287, price:699, open:5, close:24, status:'Available today', tone:'',
     format:'5-a-side + volleyball court', pitches:2, size:'40 × 20 m', surface:'50 mm turf', lights:'400 lux LED', facilities:['flood','car','shower','cafe'],
-    img:'https://images.unsplash.com/photo-1676444920926-c8a084ec4003?auto=format&fit=crop&w=800&h=1060&q=70' },
+    img:'1676444920926-c8a084ec4003' },
   { id:'porur', name:'Porur Pro Arena', area:'Porur', areaKey:'porur', sports:['Football','Cricket'], rating:4.7, reviews:309, price:649, open:6, close:25, status:'Available today', tone:'',
     format:'5s & 7s', pitches:2, size:'40 × 22 m · 52 × 30 m', surface:'55 mm turf', lights:'420 lux LED', facilities:['flood','car','shower','water'],
-    img:'https://images.unsplash.com/photo-1652190364244-96ad73c21c4c?auto=format&fit=crop&w=800&h=1060&q=70' },
+    img:'1652190364244-96ad73c21c4c' },
   { id:'tnagar', name:'T Nagar Rooftop Turf', area:'T Nagar', areaKey:'tnagar', sports:['Football','Cricket'], rating:4.8, reviews:468, price:849, open:6, close:25, status:'2 slots left tonight', tone:'warn',
     format:'5-a-side rooftop', pitches:1, size:'32 × 16 m, fully netted', surface:'50 mm turf', lights:'450 lux LED', facilities:['flood','shower','water','locker'],
-    img:'https://images.unsplash.com/photo-1621058567697-7673eef9ce28?auto=format&fit=crop&w=800&h=1060&q=70' },
+    img:'1621058567697-7673eef9ce28' },
   { id:'ecr', name:'ECR Sands Arena', area:'Injambakkam, ECR', areaKey:'ecr', sports:['Volleyball','Football'], rating:4.9, reviews:356, price:899, open:6, close:24, status:'Sunset slots', tone:'',
     format:'2 beach volleyball courts + 5s turf', pitches:3, size:'Courts 16 × 8 m', surface:'Washed river sand + 50 mm turf', lights:'400 lux LED', facilities:['flood','car','shower','cafe'],
-    img:'https://images.unsplash.com/photo-1601512986351-9b0e01780eef?auto=format&fit=crop&w=800&h=1060&q=70' },
+    img:'1601512986351-9b0e01780eef' },
 ];
 
 const AREAS = [
@@ -1732,6 +1770,9 @@ const REVIEWS = [
   { n:'Naveen T.', where:'Porur Pro Arena', fmt:'Football', s:5, t:'The turf still feels new after a year. Tournament night was well run, with a proper referee and live scores.' },
 ];
 
+/* Unsplash resize helper: photo id -> URL at the exact size a slot needs */
+const U = (id, w, h, q = 65) => `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&h=${h}&q=${q}`;
+
 const FAC = { flood:['i-flood','Floodlights'], car:['i-car','Parking'], shower:['i-shower','Changing rooms'], cafe:['i-cafe','Café'], locker:['i-locker','Lockers'], water:['i-water','Drinking water'] };
 const SPORTS = ['Football','Cricket','Badminton','Volleyball'];
 const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
@@ -1744,9 +1785,9 @@ const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const fine = matchMedia('(hover: hover) and (pointer: fine)').matches;
-const G = window.gsap, ST = window.ScrollTrigger;
-const hasG = !!(G && ST) && !reduce;
-if (hasG) G.registerPlugin(ST);
+/* GSAP, ScrollTrigger and Lenis load with `defer`, so the page renders and works before they arrive.
+   Motion is switched on in initMotion() once they're ready. */
+let G = null, ST = null, hasG = false;
 
 const pad = n => String(n).padStart(2, '0');
 const inr = n => '₹' + Math.round(n).toLocaleString('en-IN');
@@ -1761,6 +1802,7 @@ const icon = (id, cls = '') => `<svg class="icon ${cls}"><use href="#${id}"/></s
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
 const waLink = text => `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
 const TODAY = iso(new Date());
+const idle = (f, o) => (window.requestIdleCallback ? requestIdleCallback(f, o) : setTimeout(f, 300));
 
 function seeded(str) {
   let h = 2166136261;
@@ -1798,8 +1840,9 @@ function toast(msg) {
    SMOOTH SCROLL
    ============================================================ */
 let lenis = null;
-if (window.Lenis && !reduce) {
-  lenis = new window.Lenis({ lerp: .1, smoothWheel: true, wheelMultiplier: 1 });
+function setupLenis() {
+  if (!window.Lenis || reduce || !fine) return;   // touch devices keep native (fastest) scrolling
+  lenis = new window.Lenis({ lerp: .14, smoothWheel: true, wheelMultiplier: 1 });
   if (hasG) {
     lenis.on('scroll', ST.update);
     G.ticker.add(t => lenis.raf(t * 1000));
@@ -1862,7 +1905,7 @@ function onScroll() {
   const max = document.documentElement.scrollHeight - innerHeight;
   progress.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`;
 }
-if (lenis) lenis.on('scroll', onScroll); else addEventListener('scroll', onScroll, { passive: true });
+addEventListener('scroll', onScroll, { passive: true });
 onScroll();
 
 const burger = $('#burger');
@@ -1927,24 +1970,9 @@ $('#qbook').addEventListener('submit', e => {
   toast(note || `${pick.name}: ${free} slot${free === 1 ? '' : 's'} open on ${dateLabel(day)}.`);
 });
 
-/* intro + particles */
-function heroIntro() {
-  const hero = $('.hero');
-  if (!hasG) { hero.classList.remove('intro'); return; }
-  const tl = G.timeline({ defaults: { ease: 'expo.out' } });
-  tl.fromTo('#hero-media', { opacity: .06 }, { keyframes: [{ opacity: .55, duration: .07 }, { opacity: .12, duration: .1 }, { opacity: .8, duration: .07 }, { opacity: .3, duration: .12 }, { opacity: 1, duration: 1.1 }] }, .15)
-    .fromTo('#hero-media img', { scale: 1.32 }, { scale: 1.08, duration: 2.8, ease: 'power3.out' }, 0)
-    .fromTo('.hero .beam.b1', { opacity: 0 }, { keyframes: [{ opacity: .9, duration: .06 }, { opacity: .1, duration: .1 }, { opacity: .85, duration: .08 }, { opacity: .75, duration: .5 }] }, .35)
-    .fromTo('.hero .beam.b2', { opacity: 0 }, { keyframes: [{ opacity: .8, duration: .06 }, { opacity: .08, duration: .12 }, { opacity: .55, duration: .5 }] }, .6)
-    .fromTo('.hero .beam.b3', { opacity: 0 }, { opacity: .22, duration: .8 }, .9)
-    .from('#hero-title .line > span', { yPercent: 118, rotate: 4, duration: 1.35, stagger: .12 }, .5)
-    .from('[data-hero]', { y: 26, opacity: 0, duration: 1.1, stagger: .08 }, .95)
-    .from('#qbook', { y: 70, opacity: 0, rotateX: 12, transformPerspective: 1000, duration: 1.5 }, 1.05)
-    .from('.ticker', { opacity: 0, duration: 1 }, 1.3)
-    .add(() => G.to('#qbook', { y: -10, duration: 3.2, ease: 'sine.inOut', yoyo: true, repeat: -1 }));
-  hero.classList.remove('intro');
-
-  G.to('#hero-media img', { yPercent: 12, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
+/* hero: the intro plays in CSS (no wait for scripts); GSAP adds the scroll parallax */
+function heroParallax() {
+  G.to('#hero-media', { yPercent: 10, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
   G.to('.hero-copy', { y: -90, opacity: .2, ease: 'none', scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true } });
 }
 
@@ -1954,13 +1982,13 @@ function heroFX() {
   let w = 0, h = 0, dpr = 1, dust = [], balls = [], run = true, mx = .5, my = .5, raf = 0;
   const rnd = (a, b) => a + Math.random() * (b - a);
   function init() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    dpr = Math.min(window.devicePixelRatio || 1, 1.5);
     w = c.clientWidth; h = c.clientHeight;
     c.width = w * dpr; c.height = h * dpr;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const n = Math.max(30, Math.min(110, Math.round(w * h / 15000)));
+    const n = Math.max(20, Math.min(fine ? 70 : 34, Math.round(w * h / 18000)));
     dust = Array.from({ length: n }, () => ({ x: rnd(0, w), y: rnd(0, h), r: rnd(.5, 2.1), vy: -rnd(.06, .32), vx: rnd(-.12, .12), a: rnd(.15, .75), p: rnd(0, 6.28), lime: Math.random() < .35, z: rnd(.2, 1) }));
-    balls = Array.from({ length: w < 700 ? 4 : 7 }, () => ({ x: rnd(0, w), y: rnd(h * .2, h), r: rnd(6, 14), vy: -rnd(.12, .35), vx: rnd(-.15, .15), rot: rnd(0, 6.28), vr: rnd(-.01, .01), a: rnd(.14, .3), z: rnd(.4, 1) }));
+    balls = Array.from({ length: w < 700 ? 3 : 5 }, () => ({ x: rnd(0, w), y: rnd(h * .2, h), r: rnd(6, 14), vy: -rnd(.12, .35), vx: rnd(-.15, .15), rot: rnd(0, 6.28), vr: rnd(-.01, .01), a: rnd(.14, .3), z: rnd(.4, 1) }));
   }
   function ball(b, ox, oy) {
     ctx.save();
@@ -2014,7 +2042,7 @@ const track = $('#track');
 function hoursText(t) { return `${hourShort(t.open)} – ${hourShort(t.close)}`; }
 track.innerHTML = TURFS.map(t => `
   <article class="turf" data-id="${t.id}">
-    <img src="${t.img}" alt="${esc(t.name)} in ${esc(t.area)}" loading="lazy" decoding="async">
+    <img src="${U(t.img, 800, 1060)}" srcset="${U(t.img, 400, 530)} 400w, ${U(t.img, 800, 1060)} 800w" sizes="(max-width:640px) 84vw, 356px" alt="${esc(t.name)} in ${esc(t.area)}" loading="lazy" decoding="async">
     <div class="turf-top">
       <span class="badge ${t.tone}"><span class="d"></span>${esc(t.status)}</span>
       <span class="rating">${icon('i-star', 'fill')}${t.rating} <span style="opacity:.6">(${t.reviews})</span></span>
@@ -2144,7 +2172,7 @@ function openQV(id) {
   const t = turfById(id);
   const wk = t.price, we = t.price + 300, ni = t.price + 200;
   $('#qv-body').innerHTML = `
-    <div class="qv-media"><img src="${t.img}" alt="${esc(t.name)}"><span class="rating">${icon('i-star', 'fill')}${t.rating} · ${t.reviews} reviews</span></div>
+    <div class="qv-media"><img src="${U(t.img, 900, 1000)}" alt="${esc(t.name)}"><span class="rating">${icon('i-star', 'fill')}${t.rating} · ${t.reviews} reviews</span></div>
     <div class="qv-body">
       <p class="eyebrow">${esc(t.area)}, Chennai</p>
       <h3 id="qv-title">${esc(t.name)}</h3>
@@ -2261,7 +2289,7 @@ function activateArea(key) {
   const pin = $(`#map-pins .pin[data-area="${key}"]`);
   if (pin) { const had = document.activeElement === pin; pin.parentNode.appendChild(pin); if (had) pin.focus(); }
   $('#map-info').innerHTML = `
-    <img src="${t.img}" alt="">
+    <img src="${U(t.img, 128, 128)}" alt="" loading="lazy" decoding="async">
     <div><h4>${esc(t.name)}</h4><p>${a.name} · ★ ${t.rating} · from ${inr(t.price)}/hr</p></div>
     <div class="acts"><button class="btn btn-ghost" data-view="${t.id}"><span>View</span></button><button class="btn btn-lime" data-book="${t.id}"><span>Book</span></button></div>`;
   if (hasG) G.fromTo('#map-info', { y: 14, opacity: .3 }, { y: 0, opacity: 1, duration: .6, ease: 'expo.out' });
@@ -2294,7 +2322,7 @@ const B = { turf: 'arena', sport: 'Football', date: TODAY, time: null, dur: 1, c
 const bTurfs = $('#b-turfs'), bDates = $('#b-dates');
 bTurfs.innerHTML = TURFS.map(t => `
   <button class="topt" type="button" data-id="${t.id}" aria-pressed="false">
-    <img src="${t.img}" alt="" loading="lazy" decoding="async"><span class="tick">${icon('i-check')}</span>
+    <img src="${U(t.img, 400, 190)}" alt="" loading="lazy" decoding="async"><span class="tick">${icon('i-check')}</span>
     <div><b>${esc(t.name)}</b><span>${esc(t.area.split(',')[0])}<em>${inr(t.price)}</em></span></div>
   </button>`).join('');
 bDates.innerHTML = Array.from({ length: 14 }, (_, i) => {
@@ -2406,7 +2434,8 @@ function renderBooking(scrollPick) {
   $('#rail').style.setProperty('--p', Math.max(0, Math.min(1, (doneCount - 1) / 5)));
   // summary
   const img = $('#sum-img');
-  if (img.getAttribute('src') !== t.img) img.setAttribute('src', t.img);
+  const sumSrc = U(t.img, 768, 300);
+  if (img.getAttribute('src') !== sumSrc) img.setAttribute('src', sumSrc);
   img.alt = t.name;
   $('#sum-name').textContent = t.name;
   $('#sum-area').textContent = `${t.area} · ${t.format}`;
@@ -2513,12 +2542,17 @@ $$('[data-wa]').forEach(a => { a.href = waLink(`Hi ${BRAND}, I have a question a
 const gItems = $$('#gallery-grid .g');
 const lb = $('#lb'), lbImg = $('#lb-img'), lbThumbs = $('#lb-thumbs');
 let gi = 0, lbOpen = false;
-lbThumbs.innerHTML = gItems.map((g, i) => `<button type="button" data-i="${i}" aria-label="Photo ${i + 1}"><img src="${g.querySelector('img').getAttribute('src')}" alt="" loading="lazy"></button>`).join('');
+let thumbsBuilt = false;
+function buildThumbs() {
+  if (thumbsBuilt) return; thumbsBuilt = true;
+  lbThumbs.innerHTML = gItems.map((g, i) => `<button type="button" data-i="${i}" aria-label="Photo ${i + 1}"><img src="${g.querySelector('img').currentSrc || g.querySelector('img').getAttribute('src')}" alt="" decoding="async"></button>`).join('');
+}
+const fullSrc = g => innerWidth < 900 ? g.dataset.full.replace('w=1600', 'w=1000') : g.dataset.full;
 function lbShow(i) {
   gi = (i + gItems.length) % gItems.length;
   const g = gItems[gi];
   lbImg.classList.add('swap');
-  const src = g.dataset.full;
+  const src = fullSrc(g);
   const pre = new Image();
   pre.onload = pre.onerror = () => { lbImg.src = src; lbImg.alt = g.querySelector('img').alt; requestAnimationFrame(() => lbImg.classList.remove('swap')); };
   setTimeout(() => { pre.src = src; }, 120);
@@ -2526,9 +2560,9 @@ function lbShow(i) {
   $('#lb-cap').textContent = g.querySelector('.cap').textContent;
   $$('button', lbThumbs).forEach((b, k) => b.setAttribute('aria-current', String(k === gi)));
   const tb = lbThumbs.children[gi]; tb && lbThumbs.scrollTo({ left: tb.offsetLeft - lbThumbs.clientWidth / 2 + 32, behavior: 'smooth' });
-  [gi + 1, gi - 1].forEach(k => { const n = gItems[(k + gItems.length) % gItems.length]; const im = new Image(); im.src = n.dataset.full; });
+  [gi + 1, gi - 1].forEach(k => { const n = gItems[(k + gItems.length) % gItems.length]; const im = new Image(); im.src = fullSrc(n); });
 }
-function lbOpenAt(i) { lastFocus = document.activeElement; lb.classList.add('open'); lbOpen = true; lockScroll(true); lbShow(i); setTimeout(() => $('#lb-x').focus(), 60); }
+function lbOpenAt(i) { lastFocus = document.activeElement; lb.classList.add('open'); lbOpen = true; lockScroll(true); buildThumbs(); lbShow(i); setTimeout(() => $('#lb-x').focus(), 60); }
 function lbClose() { if (document.fullscreenElement) document.exitFullscreen().catch(() => {}); lb.classList.remove('open'); lbOpen = false; lockScroll(false); lastFocus?.focus?.({ preventScroll: true }); }
 gItems.forEach((g, i) => g.addEventListener('click', () => lbOpenAt(i)));
 $('#lb-x').addEventListener('click', lbClose);
@@ -2611,7 +2645,7 @@ function reviewCard(r, hidden) {
 /* ============================================================
    SKYLINE WINDOWS
    ============================================================ */
-(function windows() {
+idle(function windows() {
   const g = $('#sky-wins'); if (!g) return;
   const rnd = seeded('chennai-skyline');
   $$('#skyline .city rect').forEach(r => {
@@ -2619,13 +2653,11 @@ function reviewCard(r, hidden) {
     if (w < 20 || y >= 136 || w > 200) return;
     for (let yy = y + 7; yy < 140; yy += 9) for (let xx = x + 5; xx < x + w - 5; xx += 7) {
       if (rnd() > .26) continue;
-      const n = el('rect', { x: xx, y: yy, width: 2.4, height: 3.2, class: 'win' + (rnd() < .18 ? ' tw' : '') }, g);
+      const n = el('rect', { x: xx, y: yy, width: 2.4, height: 3.2, class: 'win' }, g);
       n.style.setProperty('--o', (.25 + rnd() * .65).toFixed(2));
-      n.style.setProperty('--d', (3 + rnd() * 6).toFixed(1) + 's');
-      n.style.animationDelay = (rnd() * 6).toFixed(1) + 's';
     }
   });
-})();
+}, { timeout: 3000 });
 
 /* ============================================================
    MICRO-INTERACTIONS
@@ -2656,9 +2688,14 @@ if (fine && !reduce) {
   cur.classList.add('hide');
   document.documentElement.classList.add('has-cursor');
   let cx = innerWidth / 2, cy = innerHeight / 2, tx = cx, ty = cy;
-  addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; cur.classList.remove('hide'); }, { passive: true });
+  let craf = 0;
+  const loop = () => {
+    cx += (tx - cx) * .24; cy += (ty - cy) * .24;
+    cur.style.transform = `translate(${cx.toFixed(1)}px, ${cy.toFixed(1)}px)`;
+    craf = Math.abs(tx - cx) + Math.abs(ty - cy) > .4 ? requestAnimationFrame(loop) : 0;
+  };
+  addEventListener('pointermove', e => { tx = e.clientX; ty = e.clientY; cur.classList.remove('hide'); if (!craf) craf = requestAnimationFrame(loop); }, { passive: true });
   document.addEventListener('pointerleave', () => cur.classList.add('hide'));
-  (function loop() { cx += (tx - cx) * .2; cy += (ty - cy) * .2; cur.style.transform = `translate(${cx.toFixed(1)}px, ${cy.toFixed(1)}px)`; requestAnimationFrame(loop); })();
   document.addEventListener('pointerover', e => {
     const lab = e.target.closest('[data-cursor]');
     const link = e.target.closest('a,button,select,input,label,.pin,.area');
@@ -2716,16 +2753,18 @@ function scrollFX() {
       G.to(cards, { x: 0, opacity: 1, duration: 1.3, ease: 'expo.out', stagger: .07, onComplete: () => cards.forEach(c => { G.set(c, { clearProps: 'transform,opacity' }); c.style.transition = ''; }) });
     } });
   }
-  // gallery reveal
-  $$('#gallery-grid .g').forEach(g => {
-    const wrap = $('.gi', g), img = $('img', g);
-    if (!below(g)) return;
-    G.set(wrap, { clipPath: 'inset(16% 0% 0% 0% round 18px)' });
-    G.set(img, { scale: 1.25 });
-    ST.create({ trigger: g, start: 'top 94%', once: true, onEnter: () => {
-      G.to(wrap, { clipPath: 'inset(0% 0% 0% 0% round 18px)', duration: 1.3, ease: 'expo.out', onComplete: () => G.set(wrap, { clearProps: 'clipPath' }) });
-      G.to(img, { scale: 1, duration: 1.6, ease: 'expo.out', onComplete: () => G.set(img, { clearProps: 'transform' }) });
-    } });
+  // gallery reveal (transform + opacity only, so it stays on the GPU)
+  const gal = $$('#gallery-grid .g').filter(below);
+  G.set(gal, { y: 40, opacity: .2 });
+  G.set(gal.map(g => $('img', g)), { scale: 1.16 });
+  ST.batch(gal, {
+    start: 'top 94%', once: true,
+    onEnter: batch => {
+      const imgs = batch.map(g => $('img', g));
+      imgs.forEach(i => { i.style.transition = 'none'; });
+      G.to(batch, { y: 0, opacity: 1, duration: 1, ease: 'expo.out', stagger: .06, clearProps: 'transform,opacity' });
+      G.to(imgs, { scale: 1, duration: 1.3, ease: 'expo.out', stagger: .06, onComplete: () => imgs.forEach(i => { G.set(i, { clearProps: 'transform' }); i.style.transition = ''; }) });
+    }
   });
   // parallax images
   $$('[data-parallax]').forEach(img => G.fromTo(img, { yPercent: -7 }, { yPercent: 7, ease: 'none', scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }));
@@ -2753,14 +2792,27 @@ function scrollFX() {
 renderBooking(false);
 setHours(1);
 trackUI();
-heroFX();
-heroIntro();
-scrollFX();
+idle(() => heroFX(), { timeout: 1200 });
+
+function initMotion() {
+  G = window.gsap; ST = window.ScrollTrigger;
+  hasG = !!(G && ST) && !reduce;
+  if (hasG) G.registerPlugin(ST);
+  setupLenis();
+  if (!hasG) return;
+  heroParallax();
+  scrollFX();
+  ST.refresh();
+}
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initMotion); else initMotion();
+
 const relayout = () => { placeInd(); segPill($('#b-dur')); segPill(hoursSeg); trackUI(); };
 addEventListener('resize', relayout);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => { relayout(); hasG && ST.refresh(); });
 addEventListener('load', () => { relayout(); hasG && ST.refresh(); });
-})();
+};
+/* build the interactive sections right after the first paint, so the hero never waits on this script */
+requestAnimationFrame(() => setTimeout(__boot, 0));
 </script>
 </body>
 </html>
